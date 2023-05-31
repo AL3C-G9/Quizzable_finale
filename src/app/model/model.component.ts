@@ -5,13 +5,13 @@ import { FreeCamera } from '@babylonjs/core/Cameras';
 import { KeyboardEventTypes } from '@babylonjs/core/Events/keyboardEvents';
 import { HemisphericLight } from '@babylonjs/core/Lights';
 import { CubeTexture, PBRMaterial, StandardMaterial, Texture } from '@babylonjs/core/Materials';
-import { Color3, Vector3 } from '@babylonjs/core/Maths';
+import { Color3, Space, Vector3 } from '@babylonjs/core/Maths';
 import { AbstractMesh, Mesh, MeshBuilder } from '@babylonjs/core/Meshes';
 import "@babylonjs/loaders/glTF";
 import { DynamicTexture, Plane} from '@babylonjs/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
-import { log } from 'console';
+import '@babylonjs/loaders/OBJ/objFileLoader';
 
 // ...
 
@@ -41,8 +41,8 @@ export class ModelComponent implements OnInit {
   pointsJ2 = localStorage.getItem("P2");
   player1nom= localStorage.getItem("nomJoueur1")
   player2nom= localStorage.getItem("nomJoueur2")
-  
-  constructor(private router:Router, private data: DataService, private route: ActivatedRoute) {  
+
+  constructor(private router:Router, private data: DataService, private route: ActivatedRoute) {
 
   }
 
@@ -50,15 +50,17 @@ export class ModelComponent implements OnInit {
     const canva = document.querySelector('canvas')!
     this.engine = new Engine(canva, true)
     this.scene = await this.CreateScene()
-    this.CreateGroud()
+   // this.CreateGroud()
     this.CreatePlayStarter(this.scene, 1.0, 0.35, 0)
     this.CreatePlayStarter2(this.scene, 1.8, 0.35, 1)
     this.CreatePlayStarter3(this.scene, 2.6, 0.35, 0)
     this.CreatePlayStarter4(this.scene, 4.0, 0.35, 1)
     this.CreatePlayStarter5(this.scene, 4.5, 0.35, 0)
-   
-    const j1 = document.getElementById("joueur1") as HTMLDivElement; 
-    const j2 = document.getElementById("joueur2") as HTMLDivElement; 
+   this.scene = await this.CreateHous(this.scene)
+
+
+    const j1 = document.getElementById("joueur1") as HTMLDivElement;
+    const j2 = document.getElementById("joueur2") as HTMLDivElement;
     this.majPoints();
     j1.innerHTML = this.player1nom + ": " +localStorage.getItem("P1") +" points";
     j2.innerHTML = this.player2nom + ": " +localStorage.getItem("P2") + " points";
@@ -191,9 +193,9 @@ export class ModelComponent implements OnInit {
     })
 
     const b1 = this.CreateBox('Niveau 1').setPositionWithLocalVector(new Vector3(1,-0.01,0));
-    const b2 = this.CreateBox('Niveau 2').setPositionWithLocalVector(new Vector3(1.8,0,1)); 
+    const b2 = this.CreateBox('Niveau 2').setPositionWithLocalVector(new Vector3(1.8,0,1));
     const b3 = this.CreateBox('Niveau 3').setPositionWithLocalVector(new Vector3(2.6,-0.01,0));
-    const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3(4.0,0,1)); 
+    const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3(4.0,0,1));
     const b5 = this.CreateBox('Niveau 5').setPositionWithLocalVector(new Vector3(4.5,-0.01,0));
     if(this.pointsJ1 && this.pointsJ2){
       console.log(this.pointsJ1, this.pointsJ2)
@@ -244,7 +246,7 @@ export class ModelComponent implements OnInit {
         }
       }
   }
-   
+
 ;
 };
 
@@ -268,17 +270,17 @@ majPoints(){
 
 CreateBox(texte:any) : Mesh{
   const box = MeshBuilder.CreateBox('box', { size: 0.3 }, this.scene);
-  
+
   const material = new StandardMaterial('material', this.scene);
   material.diffuseColor = new Color3(0.5, 0.5, 1);
   box.material = material;
-  
+
   // Create a dynamic texture for the text box
   const dynamicTexture = new DynamicTexture('dynamicTexture', { width: 490, height: 240 }, this.scene);
-  
+
   // Apply the dynamic texture to the plane
   material.diffuseTexture = dynamicTexture;
-  
+
   // Create a text box
   const text = texte;
   const font = 'bold 60px Arial';
@@ -306,7 +308,7 @@ partieTermine(phrase : string) {
   nextButton.addEventListener('click', () => {
       this.router.navigate([""]);
    });
-  
+
 }
 
 async CreateScene() : Promise<Scene>{
@@ -316,9 +318,9 @@ async CreateScene() : Promise<Scene>{
 
     camera.attachControl()
     camera.speed = 0.25
-    
-    
-    
+
+
+
     const envTex = CubeTexture.CreateFromPrefilteredData("../../assets/env/sky.env",scene)
     scene.environmentTexture = envTex
     scene.createDefaultSkybox(envTex, true)
@@ -333,7 +335,7 @@ async CreateScene() : Promise<Scene>{
       this.scene
     );
     this.octahedron1.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
-    
+
     let material = new PBRMaterial("material", scene);
     material.metallic = 0.8; // partially reflective
     material.roughness = 0.5; // partially shiny
@@ -351,7 +353,7 @@ async CreateScene() : Promise<Scene>{
     })
 
 
-	
+
     return scene
   }
 
@@ -362,7 +364,7 @@ async CreateScene() : Promise<Scene>{
       this.scene
     );
     this.octahedron2.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
-    
+
     let material = new PBRMaterial("material", scene);
     material.metallic = 0.8; // partially reflective
     material.roughness = 0.5; // partially shiny
@@ -378,7 +380,7 @@ async CreateScene() : Promise<Scene>{
       this.scene.render()
       this.octahedron2.rotation.y += 0.01;
     })
-	
+
     return scene
   }
 
@@ -389,7 +391,7 @@ async CreateScene() : Promise<Scene>{
       this.scene
     );
     this.octahedron3.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
-    
+
     let material = new PBRMaterial("material", scene);
     material.metallic = 0.8; // partially reflective
     material.roughness = 0.5; // partially shiny
@@ -415,7 +417,7 @@ async CreateScene() : Promise<Scene>{
       this.scene
     );
     this.octahedron4.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
-    
+
     let material = new PBRMaterial("material", scene);
     material.metallic = 0.8; // partially reflective
     material.roughness = 0.5; // partially shiny
@@ -431,7 +433,7 @@ async CreateScene() : Promise<Scene>{
       this.scene.render()
       this.octahedron4.rotation.y += 0.01;
     })
-	
+
     return scene
   }
 
@@ -442,7 +444,7 @@ async CreateScene() : Promise<Scene>{
       this.scene
     );
     this.octahedron5.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
-    
+
     let material = new PBRMaterial("material", scene);
     material.metallic = 0.8; // partially reflective
     material.roughness = 0.5; // partially shiny
@@ -458,13 +460,19 @@ async CreateScene() : Promise<Scene>{
       this.scene.render()
       this.octahedron5.rotation.y += 0.01;
     })
-	
+
     return scene
   }
 
+async CreateHous(scene :Scene){
+  const {meshes,animationGroups,skeletons} = await SceneLoader.ImportMeshAsync('','../../assets/models/','8_Village.obj',scene)
+  const House = meshes[0]
+  const pos = House.position
+  House.translate(new Vector3(2, 3, 4), 1, Space.WORLD)
+   return scene
+}
+
  CreateGroud(){
-
-
     const groud = MeshBuilder.CreateGround("groud",{width:100, height:10}, this.scene)
     groud.material  =this.CreateAsphalt()
   }
@@ -519,7 +527,7 @@ async CreateCommbatant(scene :Scene){
   animationGroups[0].stop()
   const hero = meshes[0]
   hero.scaling.scaleInPlace(0.5)
-  
+
 
   const skeleton = skeletons[0]
   const speed = 0.01

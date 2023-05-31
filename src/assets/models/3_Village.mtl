@@ -1,0 +1,302 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 01.08.2019 11:32:07
+
+newmtl Windows
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-PaintCrack2.jpg
+	map_Kd MMV-PaintCrack2.jpg
+
+newmtl Wood
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-Wood.jpg
+	map_Kd MMV-Wood.jpg
+
+newmtl Stone
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-Stone1.jpg
+	map_Kd MMV-Stone1.jpg
+
+newmtl CornerStone
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-Stone1.jpg
+	map_Kd MMV-Stone1.jpg
+
+newmtl DoorHi
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-Wood.jpg
+	map_Kd MMV-Wood.jpg
+
+newmtl DoorLow
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-WoodLow.jpg
+	map_Kd MMV-WoodLow.jpg
+
+newmtl Glass
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 0.73 0.73 0.73
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+
+newmtl MetalRust
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-MetalRust.jpg
+	map_Kd MMV-MetalRust.jpg
+
+newmtl Wall
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-Wall14.jpg
+	map_Kd MMV-Wall14.jpg
+
+newmtl Windows_LongMiddle1
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-PaintCrack2.jpg
+	map_Kd MMV-PaintCrack2.jpg
+
+newmtl Wood_LongMiddle1
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-Wood.jpg
+	map_Kd MMV-Wood.jpg
+
+newmtl Stone_LongMiddle1
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-Stone1.jpg
+	map_Kd MMV-Stone1.jpg
+
+newmtl Glass_LongMiddle1
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 0.73 0.73 0.73
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+
+newmtl WallMiddle
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-Wall9Low.jpg
+	map_Kd MMV-Wall9Low.jpg
+
+newmtl Windows_LongRoofMiddleTuttet1
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-PaintCrack2.jpg
+	map_Kd MMV-PaintCrack2.jpg
+
+newmtl Wood_LongRoofMiddleTuttet1
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-Wood.jpg
+	map_Kd MMV-Wood.jpg
+
+newmtl WallMiddle_LongRoofMiddleTuttet1
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-Wall9Low.jpg
+	map_Kd MMV-Wall9Low.jpg
+
+newmtl RoofTile
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-RoofTile1.jpg
+	map_Kd MMV-RoofTile1.jpg
+
+newmtl Glass_LongRoofMiddleTuttet1
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 0.73 0.73 0.73
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+
+newmtl MetalRust_LongRoofMiddleTuttet1
+	Ns 30.00
+	Ni 1.50
+	d 0.00
+	Tr 1.00
+	Tf 0.00 0.00 0.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 0.58 0.58 0.58
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+
+newmtl RoofTiles
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-RoofTiles.jpg
+	map_Kd MMV-RoofTiles.jpg
+
+newmtl Planks
+	Ns 30.00
+	Ni 1.50
+	d 1.00
+	Tr 0.00
+	Tf 1.00 1.00 1.00
+	illum 2
+	Ka 0.55 0.55 0.55
+	Kd 1.00 1.00 1.00
+	Ks 0.00 0.00 0.00
+	Ke 0.00 0.00 0.00
+	map_Ka MMV-Planks.jpg
+	map_Kd MMV-Planks.jpg
