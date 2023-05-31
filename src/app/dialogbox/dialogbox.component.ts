@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { waitForAsync } from '@angular/core/testing';
-import { ThinTexture } from '@babylonjs/core';
+import { LensFlareSystem, ThinTexture } from '@babylonjs/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 import question from "../../data/question.json";
@@ -33,6 +33,7 @@ export class DialogboxComponent implements OnInit {
   listeQuestions1: Question []= [];
   listeReponses1: Reponse []= [];
   listeRepCorrectes1: Reponsescorrectes []= [];
+  jeuEnCours :boolean =false;
 
   texteCat !: String;
   q !: String;
@@ -110,7 +111,11 @@ export class DialogboxComponent implements OnInit {
     const r1 = document.getElementById("r1") as HTMLDivElement; 
     const r2 = document.getElementById("r2") as HTMLDivElement; 
     const r3 = document.getElementById("r3") as HTMLDivElement;
-
+    const spinButton = document.querySelector('#spin') as HTMLButtonElement;
+    spinButton.addEventListener("click", function() {
+      // Désactivez le bouton
+      spinButton.disabled = true;
+  });
     setTimeout(() => { 
       cat.innerHTML = this.texteCat.toString();
       quest.innerHTML = this.q.toString(); 
@@ -209,10 +214,13 @@ export class DialogboxComponent implements OnInit {
   }
 
   jeu(){
+    const spinButton = document.querySelector('#spin') as HTMLButtonElement;
+    this.jeuEnCours=true;
     const countdown = document.getElementById("countdown") as HTMLDivElement;
     countdown.style.display='block'
-    const countDownDate = new Date().getTime() + 16000; // 15 secondes à partir de maintenant
+    const countDownDate = new Date().getTime() + 15000; // 15 secondes à partir de maintenant
     const x = setInterval(() => {
+    spinButton.disabled = true;
     const now = new Date().getTime();
     const distance = countDownDate - now;
     const seconds = Math.floor((distance % (1000 * 60)) / 1000)+1;
@@ -227,16 +235,17 @@ export class DialogboxComponent implements OnInit {
           console.log(`(J1 a gagne n points)`);
           console.log(`popup(bonne reponse j1 -> prochaine question)`);
           document.removeEventListener('keydown', jeu);
+          spinButton.disabled = false;
           countdown.innerHTML = ''
           this.player1Points= this.player1Points +5;
           if (key==='a'){
-            this.questionTermine('La bonne réponse est la 1ère. ' + this.player1Nom+ ' à gagné ce tour');
+            this.questionTermine('La bonne réponse est la 1ère , ' + this.player1Nom+ ' à gagné ce tour');
           }
           else if (key==='z'){
-            this.questionTermine('La bonne réponse est la 2ème. ' + this.player1Nom+ ' à gagné ce tour');
+            this.questionTermine('La bonne réponse est la 2ème , ' + this.player1Nom+ ' à gagné ce tour');
           }
           else if (key==='e'){
-            this.questionTermine('La bonne réponse est la 3ème. ' + this.player1Nom+ ' à gagné ce tour');
+            this.questionTermine('La bonne réponse est la 3ème , ' + this.player1Nom+ ' à gagné ce tour');
           }
           
         }
@@ -246,16 +255,17 @@ export class DialogboxComponent implements OnInit {
           if (this.checkAnswer(2, key)){
             clearInterval(x);
             document.removeEventListener('keydown', jeu);
+            spinButton.disabled = false;
             countdown.innerHTML = ''
             this.player2Points= this.player2Points +5;
             if (key==='i'){
-              this.questionTermine('La bonne réponse est la 1ère. ' + this.player2Nom+ ' à gagné ce tour');
+              this.questionTermine('La bonne réponse est la 1ère , ' + this.player2Nom+ ' à gagné ce tour');
             }
             else if (key==='o'){
-              this.questionTermine('La bonne réponse est la 2ème. ' + this.player2Nom+ ' à gagné ce tour');
+              this.questionTermine('La bonne réponse est la 2ème , ' + this.player2Nom+ ' à gagné ce tour');
             }
             else if (key==='p'){
-              this.questionTermine('La bonne réponse est la 3ème. ' + this.player2Nom+ ' à gagné ce tour');
+              this.questionTermine('La bonne réponse est la 3ème , ' + this.player2Nom+ ' à gagné ce tour');
             }
           } 
         }
@@ -268,6 +278,7 @@ export class DialogboxComponent implements OnInit {
           console.log(`(J2 a gagne n points)`);
           console.log(`popup(bonne reponse j2 -> prochaine question)`);
           document.removeEventListener('keydown', jeu);
+          spinButton.disabled = false;
           countdown.innerHTML = ''
           this.player2Points= this.player2Points +5;
           this.questionTermine(this.player2Nom+' à gagné ce niveau');
@@ -279,6 +290,7 @@ export class DialogboxComponent implements OnInit {
           if (this.checkAnswer(1, key)){
             clearInterval(x);
             document.removeEventListener('keydown', jeu);
+            spinButton.disabled = false;
             countdown.innerHTML = ''
             this.player1Points= this.player1Points +5;
             this.questionTermine(this.player1Nom+ ' à gagné ce niveau');
@@ -288,6 +300,7 @@ export class DialogboxComponent implements OnInit {
       }
       else if (this.player1Choices==1 && this.player2Choices==1 && distance >0 && !this.checkAnswer(1, key) && !this.checkAnswer(2, key)){
         document.removeEventListener('keydown', jeu);
+        spinButton.disabled = false;
         clearInterval(x);
         countdown.innerHTML = ''
         this.questionTermine('Aucun joueurs à bien repondu, cliquer pour le prochain tours');
@@ -298,12 +311,13 @@ export class DialogboxComponent implements OnInit {
     if (distance <= 0) {
       clearInterval(x);
       countdown.innerHTML = ''
+      spinButton.disabled = false;
       this.questionTermine('Temps ecoulé, cliquer pour le prochain tours')
     }
-    }, 1000);
+    }, 10);
     this.player1Choices=0;
     this.player2Choices=0;
-    
+    this.jeuEnCours=false;
   }
 
   questionTermine(phrase : string) {
