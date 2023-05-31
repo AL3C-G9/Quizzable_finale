@@ -41,9 +41,7 @@ export class DialogboxComponent implements OnInit {
   idRep : String []=[];
   
   
-  constructor(private router:Router, private data: DataService) {
-    
-  }
+  constructor(private router:Router, private data: DataService) {}
 
   ngOnInit(): void{
     const questiondata=question.questionList;
@@ -341,7 +339,6 @@ export class DialogboxComponent implements OnInit {
       }
     });
     nextButton.addEventListener('click', () => {
-        //this.spin();
         setTimeout(()  =>  {
           countdown.style.display='none'
           cat.style.display='none'

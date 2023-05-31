@@ -11,6 +11,7 @@ import "@babylonjs/loaders/glTF";
 import { DynamicTexture, Plane} from '@babylonjs/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
+import { log } from 'console';
 
 // ...
 
@@ -38,8 +39,6 @@ export class ModelComponent implements OnInit {
   names!: string[];
   pointsJ1 = localStorage.getItem("P1");
   pointsJ2 = localStorage.getItem("P2");
-  //player1nom :string;
-  //player2nom :string;
   player1nom= localStorage.getItem("nomJoueur1")
   player2nom= localStorage.getItem("nomJoueur2")
   
@@ -57,10 +56,6 @@ export class ModelComponent implements OnInit {
     this.CreatePlayStarter3(this.scene, 2.6, 0.35, 0)
     this.CreatePlayStarter4(this.scene, 4.0, 0.35, 1)
     this.CreatePlayStarter5(this.scene, 4.5, 0.35, 0)
-    //this.names = this.data.getNames();
-    console.log(this.data.getNames())
-    //this.player1nom=this.data.getName(0)
-    //this.player2nom= this.data.getName(1)
    
     const j1 = document.getElementById("joueur1") as HTMLDivElement; 
     const j2 = document.getElementById("joueur2") as HTMLDivElement; 
@@ -200,8 +195,8 @@ export class ModelComponent implements OnInit {
     const b3 = this.CreateBox('Niveau 3').setPositionWithLocalVector(new Vector3(2.6,-0.01,0));
     const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3(4.0,0,1)); 
     const b5 = this.CreateBox('Niveau 5').setPositionWithLocalVector(new Vector3(4.5,-0.01,0));
-    console.log(this.data.getP1(), this.data.getP1())
     if(this.pointsJ1 && this.pointsJ2){
+      console.log(this.pointsJ1, this.pointsJ2)
       if(parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==0){
         b1.setEnabled(true);
         b2.setEnabled(false);
@@ -258,12 +253,14 @@ majPoints(){
     if(this.pointsJ1){
       let point1 = parseInt(this.pointsJ1)+1;
       localStorage.setItem("P1", point1.toString())
+      this.pointsJ1 = localStorage.getItem("P1");
     }
   }
   else if (this.data.getGagnantBox() == this.player2nom){
     if(this.pointsJ2){
       let point2 = parseInt(this.pointsJ2)+1;
       localStorage.setItem("P2", point2.toString())
+      this.pointsJ2 = localStorage.getItem("P2");
     }
   }
   this.data.viderGagnantBox();
@@ -288,7 +285,6 @@ CreateBox(texte:any) : Mesh{
   const color = 'white';
   dynamicTexture.drawText(text, 20, 80, font, color, 'transparent', true);
   box.actionManager = new ActionManager(this.scene);
-  //box.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnLeftPickTrigger,this.ChangePageDialogBox));
   box.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnLeftPickTrigger,
     (evt) => {
       this.router.navigate(['Model', 'Questions']);
@@ -308,9 +304,7 @@ partieTermine(phrase : string) {
   phrasePopup.innerHTML = phrase;
   modal.style.display = "block";
   nextButton.addEventListener('click', () => {
-      //this.spin();
       this.router.navigate([""]);
-      
    });
   
 }
@@ -333,8 +327,6 @@ async CreateScene() : Promise<Scene>{
   }
 
   CreatePlayStarter(scene : Scene, pos1: float, pos2: float, pos3:float) : Scene{
-    //let octahedron: Mesh;
-    
     this.octahedron1 = MeshBuilder.CreatePolyhedron(
       'octahedron',
       { type: 1, size: 0.14},
@@ -343,7 +335,6 @@ async CreateScene() : Promise<Scene>{
     this.octahedron1.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
     
     let material = new PBRMaterial("material", scene);
-    //material.albedoColor = new Color3(0.5, 1, 0.5); // red color
     material.metallic = 0.8; // partially reflective
     material.roughness = 0.5; // partially shiny
 
@@ -365,8 +356,6 @@ async CreateScene() : Promise<Scene>{
   }
 
   CreatePlayStarter2(scene : Scene, pos1: float, pos2: float, pos3:float) : Scene{
-    //let octahedron: Mesh;
-    
     this.octahedron2 = MeshBuilder.CreatePolyhedron(
       'octahedron',
       { type: 1, size: 0.14},
@@ -375,7 +364,6 @@ async CreateScene() : Promise<Scene>{
     this.octahedron2.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
     
     let material = new PBRMaterial("material", scene);
-    //material.albedoColor = new Color3(0.5, 1, 0.5); // red color
     material.metallic = 0.8; // partially reflective
     material.roughness = 0.5; // partially shiny
 
@@ -395,8 +383,6 @@ async CreateScene() : Promise<Scene>{
   }
 
   CreatePlayStarter3(scene : Scene, pos1: float, pos2: float, pos3:float) : Scene{
-    //let octahedron: Mesh;
-    
     this.octahedron3 = MeshBuilder.CreatePolyhedron(
       'octahedron',
       { type: 1, size: 0.14},
@@ -405,7 +391,6 @@ async CreateScene() : Promise<Scene>{
     this.octahedron3.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
     
     let material = new PBRMaterial("material", scene);
-    //material.albedoColor = new Color3(0.5, 1, 0.5); // red color
     material.metallic = 0.8; // partially reflective
     material.roughness = 0.5; // partially shiny
 
@@ -420,14 +405,10 @@ async CreateScene() : Promise<Scene>{
       this.scene.render()
       this.octahedron3.rotation.y += 0.01;
     })
-
-
     return scene
   }
 
   CreatePlayStarter4(scene : Scene, pos1: float, pos2: float, pos3:float) : Scene{
-    //let octahedron: Mesh;
-    
     this.octahedron4 = MeshBuilder.CreatePolyhedron(
       'octahedron',
       { type: 1, size: 0.14},
@@ -436,7 +417,6 @@ async CreateScene() : Promise<Scene>{
     this.octahedron4.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
     
     let material = new PBRMaterial("material", scene);
-    //material.albedoColor = new Color3(0.5, 1, 0.5); // red color
     material.metallic = 0.8; // partially reflective
     material.roughness = 0.5; // partially shiny
 
@@ -456,8 +436,6 @@ async CreateScene() : Promise<Scene>{
   }
 
   CreatePlayStarter5(scene : Scene, pos1: float, pos2: float, pos3:float) : Scene{
-    //let octahedron: Mesh;
-    
     this.octahedron5 = MeshBuilder.CreatePolyhedron(
       'octahedron',
       { type: 1, size: 0.14},
@@ -466,7 +444,6 @@ async CreateScene() : Promise<Scene>{
     this.octahedron5.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
     
     let material = new PBRMaterial("material", scene);
-    //material.albedoColor = new Color3(0.5, 1, 0.5); // red color
     material.metallic = 0.8; // partially reflective
     material.roughness = 0.5; // partially shiny
 
@@ -533,20 +510,6 @@ intersectsBox(box1: BoundingBox, box2: BoundingBox): boolean {
   // If there's no separation along any axis, the boxes intersect
   return true;
 }
-
-/*doMeshesCollide = (mesh1: Mesh, mesh2: Mesh): boolean => {
-  //const boundingBox1 = this.octahedron1.getBoundingInfo().boundingBox;
-  //const boundingBox2 = this.octahedron2.getBoundingInfo().boundingBox;
-  //const boundingBox2 = mesh2.getBoundingInfo().boundingBox;
-  this.octahedron1.computeWorldMatrix(true); // Met à jour la matrice du mesh
-  this.octahedron2.computeWorldMatrix(true);
-  const boundingBox1 = this.octahedron1.getBoundingInfo().boundingBox;
-  const boundingBox2 = this.octahedron2.getBoundingInfo().boundingBox;
-  if(boundingBox1.intersectsBox(boundingBox2))
-boundingBox1.intersectsPoint
-  return boundingBox1.intersectsBox(boundingBox2)
-  //this.intersectsBox(boundingBox1, boundingBox2);
-};*/
 
 async CreateCommbatant(scene :Scene){
   const {meshes,animationGroups,skeletons} = await SceneLoader.ImportMeshAsync('','../../assets/models/','combattant5.glb',scene)
