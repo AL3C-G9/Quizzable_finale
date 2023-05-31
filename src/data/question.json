@@ -42,7 +42,7 @@
       },
       {
         "id": 5,
-        "question": "Quel est le nom du phénomène qui se produit lorsqu''une masse d''air chaud rencontre une masse d'air froid ?",
+        "question": "Quel est le nom du phénomène qui se produit lorsqu'une masse d'air chaud rencontre une masse d'air froid ?",
          "categorie": "Air",
         "responses": [
             "Une dépression",
@@ -52,7 +52,7 @@
       },
       {
         "id": 6,
-        "question": "À quelle altitude l''air devient-il techniquement considéré comme 'air rare' ?",
+        "question": "À quelle altitude l'air devient-il techniquement considéré comme 'air rare' ?",
          "categorie": "Air",
         "responses": [
             "2 500 mètres",
@@ -132,7 +132,7 @@
       },
       {
         "id": 14,
-        "question": "Quel est le nom de l''instrument utilisé pour mesurer la vitesse du vent ?",
+        "question": "Quel est le nom de l'instrument utilisé pour mesurer la vitesse du vent ?",
          "categorie": "Air",
         "responses": [
           "Un anémomètre",
@@ -142,7 +142,7 @@
       },
       {
         "id": 15,
-        "question": "Quelle est la vitesse de la lumière dans l''air ?",
+        "question": "Quelle est la vitesse de la lumière dans l'air ?",
          "categorie": "Air",
         "responses": [
           "299 792 km/s",
@@ -162,7 +162,7 @@
       },
       {
         "id": 17,
-        "question": "À quelle altitude se trouve la couche d''ozone dans l'atmosphère ?",
+        "question": "À quelle altitude se trouve la couche d'ozone dans l'atmosphère ?",
          "categorie": "Air",
         "responses": [
           "Dans la troposphère",
@@ -172,7 +172,7 @@
       },
       {
         "id": 18,
-        "question": "Quel est le nom de l''instrument utilisé pour mesurer l''humidité de l'air ?",
+        "question": "Quel est le nom de l'instrument utilisé pour mesurer l'humidité de l'air ?",
          "categorie": "Air",
         "responses": [
           "Un hygromètre",
@@ -187,7 +187,7 @@
         "responses": [
           "La troposphère",
           "La mésosphère",
-          "L''ionosphère"
+          "L'ionosphère"
         ]
       },
       {
@@ -245,7 +245,7 @@
         "question": "Quel est le nom du processus par lequel les nuages se forment à partir de la vapeur d'eau dans l'air ?",
         "categorie": "Air",
         "responses": [
-          "L''évaporation",
+          "L'évaporation",
           "La condensation",
           "La précipitation"
         ]
@@ -266,7 +266,7 @@
         "categorie": "Climat",
         "responses": [
           "La fonte des glaciers et des calottes glaciaires",
-          "L'expansion thermique de l''eau de mer",
+          "L'expansion thermique de l'eau de mer",
           "L'activité sismique"
         ]
       },
@@ -337,7 +337,7 @@
         "responses": [
           "Une couche de gaz dans la haute atmosphère qui protège la Terre des rayons UV du soleil",
           "Une couche de nuages qui régule la température de la Terre",
-          "Une couche de poussière qui réduit la visibilité dans l''atmosphère"
+          "Une couche de poussière qui réduit la visibilité dans l'atmosphère"
         ]
       },
       {
@@ -357,7 +357,7 @@
         "responses": [
           "La capacité d'une surface à absorber la lumière du soleil",
           "La capacité d'une surface à stocker la chaleur",
-          "La capacité d''une surface à réfléchir la lumière du soleil"
+          "La capacité d'une surface à réfléchir la lumière du soleil"
         ]
       },
       {
@@ -566,7 +566,7 @@
         "responses": [
           "Le méthane",
           "Le dioxyde de carbone",
-          "L''oxyde d''azote"
+          "L'oxyde d'azote"
         ]
       },
       {
@@ -756,7 +756,7 @@
         "responses": [
           "La présence d'une espèce protégée dans une certaine zone",
           "Le nombre d'espèces de familles et de genres différents présents dans un biotope",
-          "Le nombre d''individus présents dans un biotope"
+          "Le nombre d'individus présents dans un biotope"
         ]
       },
       {
@@ -764,7 +764,7 @@
         "question": "Quel animal parmi les suivants ne fait pas partie des animaux protégés en France?",
         "categorie": "Biologie",
         "responses": [
-          "L''hérisson",
+          "L'hérisson",
           "Le castor",
           "Le lapin "
         ]
@@ -785,7 +785,7 @@
         "categorie": "Biologie",
         "responses": [
           "Produce du CO2",
-          "Produce de l''O2",
+          "Produce de l'O2",
           "Ne produce rien"
         ]
       },
@@ -816,7 +816,7 @@
         "responses": [
           "Stocke et transmet les informations génétiques",
           "Fabrique les protéines",
-          "Transporte l''oxygène dans le corps"
+          "Transporte l'oxygène dans le corps"
         ]
       },
       {
@@ -834,9 +834,9 @@
         "question": "Quel est le rôle des mitochondries dans une cellule?",
         "categorie": "Biologie",
         "responses": [
-          "Stockage de l''énergie",
-          "Production d''énergie",
-          "Transport de l''énergie"
+          "Stockage de l'énergie",
+          "Production d'énergie",
+          "Transport de l'énergie"
         ]
       },
       {
@@ -844,9 +844,9 @@
         "question": "Qu'est-ce que la respiration cellulaire?",
         "categorie": "Biologie",
         "responses": [
-          "Le processus par lequel les cellules produisent de l''énergie",
-          "Le processus par lequel les cellules stockent de l''énergie",
-          "Le processus par lequel les cellules utilisent de l''énergie"
+          "Le processus par lequel les cellules produisent de l'énergie",
+          "Le processus par lequel les cellules stockent de l'énergie",
+          "Le processus par lequel les cellules utilisent de l'énergie"
         ]
       },
       {
@@ -904,7 +904,7 @@
         "question": "Quel est le plus petit os du corps humain ?",
         "categorie": "Biologie",
         "responses": [
-          "Le marteau (dans l''oreille)",
+          "Le marteau (dans l'oreille)",
           "Le petit orteil",
           "La rotule"
         ]
@@ -934,7 +934,7 @@
         "question": "Dans quelle partie de l'œil se trouve la rétine ?",
         "categorie": "Biologie",
         "responses": [
-          "L''iris",
+          "L'iris",
           "La cornée",
           "La sclérotique"
         ]
@@ -944,7 +944,7 @@
         "question": "Quel est le rôle principal des globules rouges ?",
         "categorie": "Biologie",
         "responses": [
-          "Transporter l''oxygène",
+          "Transporter l'oxygène",
           "Combattre les infections",
           "Réguler la température corporelle"
         ]
@@ -966,7 +966,7 @@
         "responses": [
           "La pepsine",
           "La lipase",
-          "L''amylase"
+          "L'amylase"
         ]
       },
       {
@@ -984,9 +984,9 @@
         "question": "Quel est le nom de la molécule qui stocke l'énergie dans les cellules ?",
         "categorie": "Biologie",
         "responses": [
-          "L''ATP",
-          "L''ADP",
-          "L''AMP"
+          "L'ATP",
+          "L'ADP",
+          "L'AMP"
         ]
       },
       {
@@ -1041,11 +1041,11 @@
       },
       {
         "id": 105,
-        "question": "Quel est l''effet le plus néfaste de la pollution plastique sur les océans?",
+        "question": "Quel est l'effet le plus néfaste de la pollution plastique sur les océans?",
         "categorie": "Pollution",
         "responses": [
           "La mortalité des animaux marins",
-          "La perturbation de l''écosystème marin",
+          "La perturbation de l'écosystème marin",
           "Les deux réponses A et B'"
         ]
       },
@@ -1061,12 +1061,12 @@
       },
       {
         "id": 107,
-        "question": "Quelle est la principale source de pollution de l''air en ville?",
+        "question": "Quelle est la principale source de pollution de l'air en ville?",
         "categorie": "Pollution",
         "responses": [
           "Les véhicules à moteur",
           "Les usines",
-          "Les parcs d''attractions"
+          "Les parcs d'attractions"
         ]
       },
       {
@@ -1101,7 +1101,7 @@
       },
       {
         "id": 111,
-        "question": "Quel est le principal moyen de transport responsable de la pollution de l''air en ville?",
+        "question": "Quel est le principal moyen de transport responsable de la pollution de l'air en ville?",
         "categorie": "Pollution",
         "responses": [
           "Les voitures",
@@ -1144,7 +1144,7 @@
         "question": "Quelle est la principale source de pollution des moyens de transport terrestres?",
         "categorie": "Pollution",
         "responses": [
-          "Les émissions de gaz d''échappement",
+          "Les émissions de gaz d'échappement",
           "Le bruit des moteurs",
           "Les collisions"
         ]
@@ -1181,12 +1181,12 @@
       },
       {
         "id": 119,
-        "question": "Quelle est la principale mesure prise par le gouvernement pour réduire la pollution de l''air?",
+        "question": "Quelle est la principale mesure prise par le gouvernement pour réduire la pollution de l'air?",
         "categorie": "Pollution",
         "responses": [
           "La mise en place de taxes sur les carburants",
-          "L''interdiction des véhicules à moteur",
-          "L''augmentation des subventions pour l''achat de véhicules électriques"
+          "L'interdiction des véhicules à moteur",
+          "L'augmentation des subventions pour l'achat de véhicules électriques"
         ]
       },
       {
@@ -1195,18 +1195,18 @@
         "categorie": "Pollution",
         "responses": [
           "La mise en place de zones de circulation restreinte",
-          "L''interdiction de la vente de véhicules à moteur",
-          "L''encouragement de l''utilisation des transports en commun"
+          "L'interdiction de la vente de véhicules à moteur",
+          "L'encouragement de l'utilisation des transports en commun"
         ]
       },
       {
         "id": 121,
-        "question": "Quel est le principal impact de la pollution lumineuse sur l''environnement?",
+        "question": "Quel est le principal impact de la pollution lumineuse sur l'environnement?",
         "categorie": "Pollution",
         "responses": [
-          "L''augmentation de la température",
+          "L'augmentation de la température",
           "La perturbation de la reproduction des animaux",
-          "La diminution de la qualité de l''observation des étoiles"
+          "La diminution de la qualité de l'observation des étoiles"
         ]
       },
       {
@@ -1241,21 +1241,21 @@
       },
       {
         "id": 125,
-        "question": "Quels sont les effets négatifs de la pollution des sols sur l''environnement?",
+        "question": "Quels sont les effets négatifs de la pollution des sols sur l'environnement?",
         "categorie": "Pollution",
         "responses": [
           "La perte de la biodiversité",
           "Baisse de la température",
-          "L''augmentation de la température"
+          "L'augmentation de la température"
         ]
       },
       {
         "id": 126,
-        "question": "Quelle est la principale source de pollution de l''eau?",
+        "question": "Quelle est la principale source de pollution de l'eau?",
         "categorie": "Eau",
         "responses": [
           "Les rejets industriels",
-          "Les pesticides utilisés dans l''agriculture",
+          "Les pesticides utilisés dans l'agriculture",
           "La pluie acide"
         ]
       },
@@ -1271,7 +1271,7 @@
       },
       {
         "id": 128,
-        "question": "Quelle est la principale source d''eau potable pour les humains?",
+        "question": "Quelle est la principale source d'eau potable pour les humains?",
         "categorie": "Eau",
         "responses": [
           "Les rivières",
@@ -1281,7 +1281,7 @@
       },
       {
         "id": 129,
-        "question": "Quels sont les principaux polluants de l''eau?",
+        "question": "Quels sont les principaux polluants de l'eau?",
         "categorie": "Eau",
         "responses": [
           "Les déchets organiques",
@@ -1291,7 +1291,7 @@
       },
       {
         "id": 130,
-        "question": "Quelle est la quantité d''eau douce disponible sur terre?",
+        "question": "Quelle est la quantité d'eau douce disponible sur terre?",
         "categorie": "Eau",
         "responses": [
           "Moins de 5%",
@@ -1301,27 +1301,27 @@
       },
       {
         "id": 131,
-        "question": "Quelle est la principale utilisation de l''eau douce sur terre?",
+        "question": "Quelle est la principale utilisation de l'eau douce sur terre?",
         "categorie": "Eau",
         "responses": [
-          "l''agriculture",
-          "l''industrie",
+          "l'agriculture",
+          "l'industrie",
           "les besoins domestiques"
         ]
       },
       {
         "id": 132,
-        "question": "Quel est l''impact de la surexploitation des ressources en eau sur les écosystèmes?",
+        "question": "Quel est l'impact de la surexploitation des ressources en eau sur les écosystèmes?",
         "categorie": "Eau",
         "responses": [
           "La diminution des populations animales",
-          "L''augmentation de la salinité de l'eau",
+          "L'augmentation de la salinité de l'eau",
           "Les deux réponses sont vraies"
         ]
       },
       {
         "id": 133,
-        "question": "Quelle est la formule chimique de l''eau?",
+        "question": "Quelle est la formule chimique de l'eau?",
         "categorie": "Eau",
         "responses": [
           "H2O2",
@@ -1341,7 +1341,7 @@
       },
       {
         "id": 135,
-        "question": "Quel est le pourcentage d''eau sur Terre?",
+        "question": "Quel est le pourcentage d'eau sur Terre?",
         "categorie": "Eau",
         "responses": [
           "50%",
@@ -1351,7 +1351,7 @@
       },
       {
         "id": 136,
-        "question": "Est-ce que l''eau du robinet peut être utilisée pour boire et cuisiner?",
+        "question": "Est-ce que l'eau du robinet peut être utilisée pour boire et cuisiner?",
         "categorie": "Eau",
         "responses": [
           "Non",
@@ -1381,7 +1381,7 @@
       },
       {
         "id": 139,
-        "question": "Combien de litres d''eau utilise une personne en moyenne par jour pour ses besoins quotidiens ?",
+        "question": "Combien de litres d'eau utilise une personne en moyenne par jour pour ses besoins quotidiens ?",
         "categorie": "Eau",
         "responses": [
           "50 litres",
@@ -1401,17 +1401,17 @@
       },
       {
         "id": 141,
-        "question": "Quel est le facteur le plus important à prendre en compte pour évaluer la qualité de l''eau ?",
+        "question": "Quel est le facteur le plus important à prendre en compte pour évaluer la qualité de l'eau ?",
         "categorie": "Eau",
         "responses": [
-          "La couleur de l''eau",
-          "L''odeur de l''eau",
-          "Les concentrations de substances chimiques dans l''eau"
+          "La couleur de l'eau",
+          "L'odeur de l'eau",
+          "Les concentrations de substances chimiques dans l'eau"
         ]
       },
       {
         "id": 142,
-        "question": "Combien de pourcentage de la Terre est couvert d''eau ?",
+        "question": "Combien de pourcentage de la Terre est couvert d'eau ?",
         "categorie": "Eau",
         "responses": [
           "50%",
@@ -1431,7 +1431,7 @@
       },
       {
         "id": 144,
-        "question": "Quel est l''impact le plus courant de la pollution des eaux sur la faune aquatique ?",
+        "question": "Quel est l'impact le plus courant de la pollution des eaux sur la faune aquatique ?",
         "categorie": "Eau",
         "responses": [
           "La migration",
@@ -1441,27 +1441,27 @@
       },
       {
         "id": 145,
-        "question": "Quel est le principal usage de l''eau dans les foyers ?",
+        "question": "Quel est le principal usage de l'eau dans les foyers ?",
         "categorie": "Eau",
         "responses": [
           "La toilette",
           "La cuisine",
-          "L''arrosage du jardin"
+          "L'arrosage du jardin"
         ]
       },
       {
         "id": 146,
-        "question": "Quel est le principal facteur qui détermine la consommation d''eau dans les foyers ?",
+        "question": "Quel est le principal facteur qui détermine la consommation d'eau dans les foyers ?",
         "categorie": "Eau",
         "responses": [
           "Le nombre de personnes vivant dans le foyer",
           "La région géographique",
-          "Les habitudes de consommation d''eau de chaque personne"
+          "Les habitudes de consommation d'eau de chaque personne"
         ]
       },
       {
         "id": 147,
-        "question": "Combien de personnes dans le monde n''ont pas accès à une source d''eau potable sûre ?",
+        "question": "Combien de personnes dans le monde n'ont pas accès à une source d'eau potable sûre ?",
         "categorie": "Eau",
         "responses": [
           "100 millions",
@@ -1471,7 +1471,7 @@
       },
       {
         "id": 148,
-        "question": "Quel est le facteur qui affecte le plus la disponibilité de l''eau douce dans le monde ?",
+        "question": "Quel est le facteur qui affecte le plus la disponibilité de l'eau douce dans le monde ?",
         "categorie": "Eau",
         "responses": [
           "La surconsommation",
@@ -1491,7 +1491,7 @@
       },
       {
         "id": 150,
-        "question": "Quelle est la couleur la plus courante d''un iceberg ?",
+        "question": "Quelle est la couleur la plus courante d'un iceberg ?",
         "categorie": "Eau",
         "responses": [
           "Blanc",
@@ -1501,10 +1501,10 @@
       },
       {
         "id": 151,
-        "question": "Qu''est-ce que les ressources naturelles ?",
+        "question": "Qu'est-ce que les ressources naturelles ?",
         "categorie": "Ressources naturelles",
         "responses": [
-          "Des biens produits par l''homme",
+          "Des biens produits par l'homme",
           "Des biens produits par la nature",
           "Des biens produits par les animaux"
         ]
@@ -1514,7 +1514,7 @@
         "question": "Les ressources naturelles peuvent être renouvelables ou non renouvelables, laquelle est considérée comme une ressource non renouvelable ?",
         "categorie": "Ressources naturelles",
         "responses": [
-          "L''eau",
+          "L'eau",
           "Le soleil",
           "Le charbon"
         ]
@@ -1526,12 +1526,12 @@
         "responses": [
           "Les minéraux",
           "Les végétaux",
-          "L''eau"
+          "L'eau"
         ]
       },
       {
         "id": 154,
-        "question": "Quelle est la principale source d''énergie renouvelable utilisée dans le monde ?",
+        "question": "Quelle est la principale source d'énergie renouvelable utilisée dans le monde ?",
         "categorie": "Ressources naturelles",
         "responses": [
           "Le vent",
@@ -1546,7 +1546,7 @@
         "responses": [
           "Le fer",
           "Le cuivre",
-          "L''aluminium"
+          "L'aluminium"
         ]
       },
       {
@@ -1556,7 +1556,7 @@
         "responses": [
           "Le méthane",
           "Le dioxyde de carbone",
-          "L''ozone"
+          "L'ozone"
         ]
       },
       {
@@ -1566,12 +1566,12 @@
         "responses": [
           "Le diamant",
           "Le platine",
-          "L''or"
+          "L'or"
         ]
       },
       {
         "id": 158,
-        "question": "Quelle est la principale source d''énergie renouvelable dans le monde?",
+        "question": "Quelle est la principale source d'énergie renouvelable dans le monde?",
         "categorie": "Ressources naturelles",
         "responses": [
           "Eolienne",
@@ -1581,17 +1581,17 @@
       },
       {
         "id": 159,
-        "question": "Quelle est la principale utilisation de l''énergie éolienne?",
+        "question": "Quelle est la principale utilisation de l'énergie éolienne?",
         "categorie": "Ressources naturelles",
         "responses": [
-          "Production d''électricité",
+          "Production d'électricité",
           "Chauffage des maisons",
           "Traction animale"
         ]
       },
       {
         "id": 160,
-        "question": "Lequel de ces produits est produit à partir d''une source renouvelable?",
+        "question": "Lequel de ces produits est produit à partir d'une source renouvelable?",
         "categorie": "Ressources naturelles",
         "responses": [
           "Plastique",
@@ -1601,7 +1601,7 @@
       },
       {
         "id": 161,
-        "question": "Quelle est la source d''énergie la plus utilisée en Europe?",
+        "question": "Quelle est la source d'énergie la plus utilisée en Europe?",
         "categorie": "Ressources naturelles",
         "responses": [
           "Gaz naturel",
@@ -1611,7 +1611,7 @@
       },
       {
         "id": 162,
-        "question": "Quel est le nom de la technologie qui utilise la chaleur du soleil pour produire de l''électricité?",
+        "question": "Quel est le nom de la technologie qui utilise la chaleur du soleil pour produire de l'électricité?",
         "categorie": "Ressources naturelles",
         "responses": [
           "Photovoltaïque",
@@ -1621,7 +1621,7 @@
       },
       {
         "id": 163,
-        "question": "Quel est l''avantage des sources d''énergie renouvelables par rapport aux sources d''énergie non renouvelables?",
+        "question": "Quel est l'avantage des sources d'énergie renouvelables par rapport aux sources d'énergie non renouvelables?",
         "categorie": "Ressources naturelles",
         "responses": [
           "Épuisement rapide",
@@ -1631,7 +1631,7 @@
       },
       {
         "id": 164,
-        "question": "Quel est le plus grand producteur d''énergie solaire au monde?",
+        "question": "Quel est le plus grand producteur d'énergie solaire au monde?",
         "categorie": "Ressources naturelles",
         "responses": [
           "États-Unis",
@@ -1651,7 +1651,7 @@
       },
       {
         "id": 166,
-        "question": "D''où provient le pétrole ?",
+        "question": "D'où provient le pétrole ?",
         "categorie": "Ressources naturelles",
         "responses": [
           "Des minéraux",
@@ -1665,8 +1665,8 @@
         "categorie": "Ressources naturelles",
         "responses": [
           "Du gaz naturel",
-          "De l''essence et du diesel ",
-          "De la vapeur d''eau"
+          "De l'essence et du diesel ",
+          "De la vapeur d'eau"
         ]
       },
       {
@@ -1711,7 +1711,7 @@
       },
       {
         "id": 172,
-        "question": "Comment fonctionne l''énergie géothermique?",
+        "question": "Comment fonctionne l'énergie géothermique?",
         "categorie": "Ressources naturelles",
         "responses": [
           "En utilisant la chaleur produite par la Terre",
@@ -1751,12 +1751,12 @@
       },
       {
         "id": 176,
-        "question": "Quelle est la principale cause d''une éruption volcanique ?",
+        "question": "Quelle est la principale cause d'une éruption volcanique ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
           "Le magma atteint la surface de la Terre",
           "Tremblements de terre",
-          "L''impact d''un météore"
+          "L'impact d'un météore"
         ]
       },
       {
@@ -1771,7 +1771,7 @@
       },
       {
         "id": 178,
-        "question": "Quel est le terme utilisé pour décrire le point de la surface de la Terre situé directement au-dessus du foyer d''un tremblement de terre ?",
+        "question": "Quel est le terme utilisé pour décrire le point de la surface de la Terre situé directement au-dessus du foyer d'un tremblement de terre ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
           "Épicentre",
@@ -1781,12 +1781,12 @@
       },
       {
         "id": 179,
-        "question": "Quel est le terme utilisé pour décrire la mesure de la magnitude d''un tremblement de terre ?",
+        "question": "Quel est le terme utilisé pour décrire la mesure de la magnitude d'un tremblement de terre ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
           "Échelle de Mercalli",
           "Échelle sismique",
-          "L''échelle de Richter"
+          "L'échelle de Richter"
         ]
       },
       {
@@ -1795,7 +1795,7 @@
         "categorie": "Catastrophes naturelles",
         "responses": [
           "La tectonique des plaques",
-          "L''activité sismique",
+          "L'activité sismique",
           "Mouvement de la Terre"
         ]
       },
@@ -1831,7 +1831,7 @@
       },
       {
         "id": 184,
-        "question": "Jusqu''où les tsunamis peuvent-ils aller à l''intérieur des terres ?",
+        "question": "Jusqu'où les tsunamis peuvent-ils aller à l'intérieur des terres ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
           "10 km",
@@ -1844,9 +1844,9 @@
         "question": "Quel océan est le plus sujet aux tsunamis ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
-          "L''océan Atlantique",
-          "L''océan Pacifique",
-          "L''océan Indien"
+          "L'océan Atlantique",
+          "L'océan Pacifique",
+          "L'océan Indien"
         ]
       },
       {
@@ -1865,33 +1865,33 @@
         "categorie": "Catastrophes naturelles",
         "responses": [
           "La haute pression",
-          "L''altitude élevée",
+          "L'altitude élevée",
           "Le manque de précipitations"
         ]
       },
       {
         "id": 188,
-        "question": "Laquelle des régions suivantes est considérée comme l''un des endroits les plus secs de la planète ?",
+        "question": "Laquelle des régions suivantes est considérée comme l'un des endroits les plus secs de la planète ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
-          "Le désert d''Atacama en Amérique du Sud",
+          "Le désert d'Atacama en Amérique du Sud",
           "Le désert du Sahara en Afrique",
           "Le désert du Kalahari en Afrique"
         ]
       },
       {
         "id": 189,
-        "question": "Qu''est-ce qu''un tsunami ?",
+        "question": "Qu'est-ce qu'un tsunami ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
           "Un type de tempête avec des vents forts et de fortes pluies",
           "Une vague océanique géante causée par un tremblement de terre",
-          "Un type de requin que l''on trouve dans l''océan Pacifique"
+          "Un type de requin que l'on trouve dans l'océan Pacifique"
         ]
       },
       {
         "id": 190,
-        "question": "Qu''est-ce qu''est la canicule ?",
+        "question": "Qu'est-ce qu'est la canicule ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
           "Un type de tempête",
@@ -1911,7 +1911,7 @@
       },
       {
         "id": 192,
-        "question": "Quelle est la principale cause d''une tornade ?",
+        "question": "Quelle est la principale cause d'une tornade ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
           "Les tremblements de terre",
@@ -1921,10 +1921,10 @@
       },
       {
         "id": 193,
-        "question": "Lequel des éléments suivants est un signe d''alerte indiquant qu''un volcan pourrait entrer en éruption prochainement ?",
+        "question": "Lequel des éléments suivants est un signe d'alerte indiquant qu'un volcan pourrait entrer en éruption prochainement ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
-          "Une augmentation de l''activité sismique",
+          "Une augmentation de l'activité sismique",
           "Ciel dégagé et vents calmes",
           "Diminution des émissions de gaz"
         ]
@@ -1935,7 +1935,7 @@
         "categorie": "Catastrophes naturelles",
         "responses": [
           "La foudre",
-          "L''activité humaine",
+          "L'activité humaine",
           "Les éruptions volcaniques"
         ]
       },
@@ -1944,14 +1944,14 @@
         "question": "Quelle est la différence entre un ouragan et un typhon ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
-          "Les ouragans se produisent dans l''océan Atlantique, tandis que les typhons se produisent dans l''océan Pacifique",
+          "Les ouragans se produisent dans l'océan Atlantique, tandis que les typhons se produisent dans l'océan Pacifique",
           "Les ouragans ont une vitesse de vent plus faible que les typhons",
-          "Il n''y a pas de différence, il s''agit du même type de tempête"
+          "Il n'y a pas de différence, il s'agit du même type de tempête"
         ]
       },
       {
         "id": 196,
-        "question": "Quel est le type d''éruption volcanique le plus courant ?",
+        "question": "Quel est le type d'éruption volcanique le plus courant ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
           "Stromboliene",
@@ -1961,7 +1961,7 @@
       },
       {
         "id": 197,
-        "question": "Lequel des éléments suivants est un signe avant-coureur de la formation d''une tornade ?",
+        "question": "Lequel des éléments suivants est un signe avant-coureur de la formation d'une tornade ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
           "Un ciel clair et des vents calmes",
@@ -1981,7 +1981,7 @@
       },
       {
         "id": 199,
-        "question": "Quel est le nom d''une colonne d''air en rotation qui est en contact avec le sol et qui est capable de causer des dommages importants ?",
+        "question": "Quel est le nom d'une colonne d'air en rotation qui est en contact avec le sol et qui est capable de causer des dommages importants ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
           "Typhon",
@@ -1991,7 +1991,7 @@
       },
       {
         "id": 200,
-        "question": "Quel type de catastrophe naturelle s''est produit en 79 après J.-C., ensevelissant les villes de Pompéi et Herculanum sous des cendres et des roches volcaniques ?",
+        "question": "Quel type de catastrophe naturelle s'est produit en 79 après J.-C., ensevelissant les villes de Pompéi et Herculanum sous des cendres et des roches volcaniques ?",
         "categorie": "Catastrophes naturelles",
         "responses": [
           "Un tremblement de terre",
