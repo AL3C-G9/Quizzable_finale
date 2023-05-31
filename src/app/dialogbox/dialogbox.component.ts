@@ -229,7 +229,15 @@ export class DialogboxComponent implements OnInit {
           document.removeEventListener('keydown', jeu);
           countdown.innerHTML = ''
           this.player1Points= this.player1Points +5;
-          this.questionTermine(this.player1Nom+ ' à gagné ce tour');
+          if (key==='a'||key==='i'){
+            this.questionTermine('La bonne réponse est la 1ère. ' + this.player1Nom+ ' à gagné ce tour');
+          }
+          else if (key==='z'||key==='o'){
+            this.questionTermine('La bonne réponse est la 2ème. ' + this.player1Nom+ ' à gagné ce tour');
+          }
+          else if (key==='e'||key==='p'){
+            this.questionTermine('La bonne réponse est la 3ème. ' + this.player1Nom+ ' à gagné ce tour');
+          }
           
         }
         else{
