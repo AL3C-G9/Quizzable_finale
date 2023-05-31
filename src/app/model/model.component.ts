@@ -36,11 +36,12 @@ export class ModelComponent implements OnInit {
   target: any;
   box: any;
   names!: string[];
-  pointsJ1 !: number;
-  pointsJ2 !: number ;
-  player1nom !:string;
-  player2nom !:string;
-  
+  pointsJ1 = localStorage.getItem("P1");
+  pointsJ2 = localStorage.getItem("P2");
+  //player1nom :string;
+  //player2nom :string;
+  player1nom= localStorage.getItem("nomJoueur1")
+  player2nom= localStorage.getItem("nomJoueur2")
   
   constructor(private router:Router, private data: DataService, private route: ActivatedRoute) {  
 
@@ -58,18 +59,19 @@ export class ModelComponent implements OnInit {
     this.CreatePlayStarter5(this.scene, 4.5, 0.35, 0)
     //this.names = this.data.getNames();
     console.log(this.data.getNames())
-    this.player1nom=this.data.getName(0)
-    this.player2nom= this.data.getName(1)
+    //this.player1nom=this.data.getName(0)
+    //this.player2nom= this.data.getName(1)
+   
     const j1 = document.getElementById("joueur1") as HTMLDivElement; 
     const j2 = document.getElementById("joueur2") as HTMLDivElement; 
     this.majPoints();
-    j1.innerHTML = this.player1nom + ": " +this.data.getP1() +" points";
-    j2.innerHTML = this.player2nom + ": " +this.data.getP2() +" points";
+    j1.innerHTML = this.player1nom + ": " +localStorage.getItem("P1") +" points";
+    j2.innerHTML = this.player2nom + ": " +localStorage.getItem("P2") + " points";
 
     const  hero   =  await this.CreateCommbatant(this.scene)
-    hero.setPositionWithLocalVector(new Vector3(0.5,0,0));
+    hero.setPositionWithLocalVector(new Vector3(0.7,0,0));
     const  hero2  = await this.CreateCommbatant2(this.scene)
-    const speed = 0.03
+    const speed = 0.01
 
     const walk =   this.scene.getAnimationGroupByName("walk")
     const doubleAttack = this.scene.getAnimationGroupByName("doubleAttack")
@@ -199,64 +201,70 @@ export class ModelComponent implements OnInit {
     const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3(4.0,0,1)); 
     const b5 = this.CreateBox('Niveau 5').setPositionWithLocalVector(new Vector3(4.5,-0.01,0));
     console.log(this.data.getP1(), this.data.getP1())
-    if(this.data.getP1()+this.data.getP2()==0){
-      b1.setEnabled(true);
-      b2.setEnabled(false);
-      b3.setEnabled(false);
-      b4.setEnabled(false);
-      b5.setEnabled(false);
-    }
-    else if (this.data.getP1()+this.data.getP2()==1){
-      b1.setEnabled(false);
-      b2.setEnabled(true);
-      b3.setEnabled(false);
-      b4.setEnabled(false);
-      b5.setEnabled(false);
-    }
-    else if (this.data.getP1()+this.data.getP2()==2){
-      b1.setEnabled(false);
-      b2.setEnabled(false);
-      b3.setEnabled(true);
-      b4.setEnabled(false);
-      b5.setEnabled(false);
-    }
-    else if (this.data.getP1()+this.data.getP2()==3){
-      b1.setEnabled(false);
-      b2.setEnabled(false);
-      b3.setEnabled(false);
-      b4.setEnabled(true);
-      b5.setEnabled(false);
-    }else if (this.data.getP1()+this.data.getP2()==4){
-      b1.setEnabled(false);
-      b2.setEnabled(false);
-      b3.setEnabled(false);
-      b4.setEnabled(false);
-      b5.setEnabled(true);
-    }else if (this.data.getP1()+this.data.getP2()==5){
-      b1.setEnabled(false);
-      b2.setEnabled(false);
-      b3.setEnabled(false);
-      b4.setEnabled(false);
-      b5.setEnabled(false);
-      if(this.data.getP1()>this.data.getP2()){
-        console.log(this.data.getP1() , this.data.getP2())
-        this.partieTermine('Fin de la partie ' +this.player1nom+ ' a gagne!');
+    if(this.pointsJ1 && this.pointsJ2){
+      if(parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==0){
+        b1.setEnabled(true);
+        b2.setEnabled(false);
+        b3.setEnabled(false);
+        b4.setEnabled(false);
+        b5.setEnabled(false);
       }
-      else{
-        console.log(this.pointsJ1 , this.pointsJ2)
-        this.partieTermine('Fin de la partie ' +this.player2nom+ ' a gagne!');
+      else if (parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==1){
+        b1.setEnabled(false);
+        b2.setEnabled(true);
+        b3.setEnabled(false);
+        b4.setEnabled(false);
+        b5.setEnabled(false);
       }
-    }
+      else if (parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==2){
+        b1.setEnabled(false);
+        b2.setEnabled(false);
+        b3.setEnabled(true);
+        b4.setEnabled(false);
+        b5.setEnabled(false);
+      }
+      else if (parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==3){
+        b1.setEnabled(false);
+        b2.setEnabled(false);
+        b3.setEnabled(false);
+        b4.setEnabled(true);
+        b5.setEnabled(false);
+      }else if (parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==4){
+        b1.setEnabled(false);
+        b2.setEnabled(false);
+        b3.setEnabled(false);
+        b4.setEnabled(false);
+        b5.setEnabled(true);
+      }else if (parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==5){
+        b1.setEnabled(false);
+        b2.setEnabled(false);
+        b3.setEnabled(false);
+        b4.setEnabled(false);
+        b5.setEnabled(false);
+        if(parseInt(this.pointsJ1)>parseInt(this.pointsJ2)){
+          this.partieTermine('Fin de la partie ' +this.player1nom+ ' a gagne!');
+        }
+        else{
+          this.partieTermine('Fin de la partie ' +this.player2nom+ ' a gagne!');
+        }
+      }
+  }
    
 ;
 };
 
 majPoints(){
   if(this.data.getGagnantBox() == this.player1nom){
-    this.data.setP1()
+    if(this.pointsJ1){
+      let point1 = parseInt(this.pointsJ1)+1;
+      localStorage.setItem("P1", point1.toString())
+    }
   }
   else if (this.data.getGagnantBox() == this.player2nom){
-    this.data.setP2()
+    if(this.pointsJ2){
+      let point2 = parseInt(this.pointsJ2)+1;
+      localStorage.setItem("P2", point2.toString())
+    }
   }
   this.data.viderGagnantBox();
 }

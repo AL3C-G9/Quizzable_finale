@@ -25,10 +25,14 @@ export class AccueilComponent implements OnInit {
   }
   ChangePageModel(){
     //console.log(this.joueur1, this.joueur2)
-    this.data.addName(this.joueur1);
-    this.data.addName(this.joueur2);
-    this.data.initializeP1();
-    this.data.initializeP2();
+    //this.data.addName(this.joueur1);
+    //this.data.addName(this.joueur2);
+    //this.data.initializeP1();
+    //this.data.initializeP2();
+    localStorage.setItem("P1","0")
+    localStorage.setItem("P2","0")
+    localStorage.setItem("nomJoueur1",this.joueur1)
+    localStorage.setItem("nomJoueur2",this.joueur2)
     this.router.navigate(["Model"]);
   }
 

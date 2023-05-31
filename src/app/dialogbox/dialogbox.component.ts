@@ -19,8 +19,6 @@ export class DialogboxComponent implements OnInit {
 
   answerKey1 !: String;
   answerKey2 !: String;
-  player1Nom !: string;
-  player2Nom !: string;
   player1Keys = ['a', 'z', 'e']; // Touches pour joueur 1
   player2Keys = ['i', 'o', 'p']; // Touches pour joueur 2
   player1Choices = 0; // Nombre de choix pour joueur 1
@@ -28,6 +26,8 @@ export class DialogboxComponent implements OnInit {
   number: number = 0;
   player1Points =0;
   player2Points = 0;
+  player1Nom = localStorage.getItem("nomJoueur1");
+  player2Nom= localStorage.getItem("nomJoueur2");
 
   listeCategorie1: string []= [];
   listeQuestions1: Question []= [];
@@ -40,9 +40,9 @@ export class DialogboxComponent implements OnInit {
   idQuest !: number;
   idRep : String []=[];
   
+  
   constructor(private router:Router, private data: DataService) {
-    this.player1Nom=this.data.getName(0);
-    this.player2Nom=this.data.getName(1);
+    
   }
 
   ngOnInit(): void{
@@ -115,7 +115,7 @@ export class DialogboxComponent implements OnInit {
     spinButton.addEventListener("click", function() {
       // Désactivez le bouton
       spinButton.disabled = true;
-  });
+    });
     setTimeout(() => { 
       cat.innerHTML = this.texteCat.toString();
       quest.innerHTML = this.q.toString(); 
@@ -375,13 +375,17 @@ export class DialogboxComponent implements OnInit {
       spinButton.disabled = true; // Désactiver le bouton une fois que le nombre maximal de clics a été atteint
       if(this.player1Points>this.player2Points){
         console.log(this.player1Points , this.player2Points)
-        this.data.addGagnantBox(this.player1Nom);
-        this.partieTermine('Fin de la partie ' +this.player1Nom+ ' a gagne!');
+        if(this.player1Nom != null){
+          this.data.addGagnantBox(this.player1Nom);
+          this.partieTermine('Fin de la partie ' +this.player1Nom+ ' a gagne!');
+        }
       }
       else if (this.player1Points<this.player2Points){
         console.log(this.player1Points , this.player2Points)
-        this.data.addGagnantBox(this.player2Nom);
-        this.partieTermine('Fin de la partie ' +this.player2Nom+' a gagne!');
+        if(this.player2Nom != null){
+          this.data.addGagnantBox(this.player2Nom);
+          this.partieTermine('Fin de la partie ' +this.player2Nom+' a gagne!');
+        }
       }
       else if (this.player1Points==this.player2Points) {
         spinButton.disabled = false;
@@ -394,14 +398,18 @@ export class DialogboxComponent implements OnInit {
           if(this.player1Points>this.player2Points){
             gagnant=true;
             console.log('J1 a gagne')
-            this.data.addGagnantBox(this.player1Nom);
-            this.partieTermine('Fin de la partie ' +this.player1Nom+ ' a gagne!');
+            if(this.player1Nom != null){
+              this.data.addGagnantBox(this.player1Nom);
+              this.partieTermine('Fin de la partie ' +this.player1Nom+ ' a gagne!');
+            }
           }
           else if (this.player1Points<this.player2Points){
             gagnant=true;
             console.log('J2 a gagné')
-            this.data.addGagnantBox(this.player2Nom);
-            this.partieTermine('Fin de la partie ' +this.player2Nom+' a gagne!');
+            if(this.player2Nom != null){
+              this.data.addGagnantBox(this.player2Nom);
+              this.partieTermine('Fin de la partie ' +this.player2Nom+' a gagne!');
+            }
           }
         }
       }
