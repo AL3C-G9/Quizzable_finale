@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Scene,Engine, SceneLoader, ExecuteCodeAction, float, BoundingBox, BoundingBoxRenderer } from '@babylonjs/core';
+import { Scene,Engine, SceneLoader, ExecuteCodeAction, float, BoundingBox, BoundingBoxRenderer, CannonJSPlugin, PhysicsImpostor } from '@babylonjs/core';
 import { ActionManager } from '@babylonjs/core/Actions/actionManager';
-import { FreeCamera } from '@babylonjs/core/Cameras';
+import { ArcRotateCamera, FreeCamera } from '@babylonjs/core/Cameras';
 import { KeyboardEventTypes } from '@babylonjs/core/Events/keyboardEvents';
 import { HemisphericLight } from '@babylonjs/core/Lights';
-import { CubeTexture, PBRMaterial, StandardMaterial, Texture } from '@babylonjs/core/Materials';
+import { CubeTexture, HDRCubeTexture, PBRMaterial, StandardMaterial, Texture } from '@babylonjs/core/Materials';
 import { Color3, Space, Vector3 } from '@babylonjs/core/Maths';
 import { AbstractMesh, Mesh, MeshBuilder } from '@babylonjs/core/Meshes';
 import "@babylonjs/loaders/glTF";
@@ -12,7 +12,7 @@ import { DynamicTexture, Plane} from '@babylonjs/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
 import '@babylonjs/loaders/OBJ/objFileLoader';
-
+import * as CANNON from 'cannon';
 // ...
 
 
@@ -50,7 +50,17 @@ export class ModelComponent implements OnInit {
     const canva = document.querySelector('canvas')!
     this.engine = new Engine(canva, true)
     this.scene = await this.CreateScene()
+    //const camera = new FreeCamera("camera", new Vector3(2.2,0.75,-3.2), this.scene)
+    //camera.attachControl()
+    //camera.speed = 0.25
    // this.CreateGroud()
+
+   var camera1 = new ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 4, 10, new Vector3(0, -7, 0), this.scene);
+   this.scene.activeCamera = camera1;
+   this.scene.activeCamera.attachControl(canva, true);
+   camera1.lowerRadiusLimit = 2;
+   camera1.upperRadiusLimit = 10;
+   camera1.wheelDeltaPercentage = 0.01;
     this.CreatePlayStarter(this.scene, 1.0, 0.35, 0)
     this.CreatePlayStarter2(this.scene, 1.8, 0.35, 1)
     this.CreatePlayStarter3(this.scene, 2.6, 0.35, 0)
@@ -66,9 +76,10 @@ export class ModelComponent implements OnInit {
     j2.innerHTML = this.player2nom + ": " +localStorage.getItem("P2") + " points";
 
     const  hero   =  await this.CreateCommbatant(this.scene)
-    hero.setPositionWithLocalVector(new Vector3(0.7,0,0));
+    hero.setPositionWithLocalVector(new Vector3(0.7,2,0));
+    camera1.target = hero.position
     const  hero2  = await this.CreateCommbatant2(this.scene)
-    const speed = 0.01
+    const speed = 0.7
 
     const walk =   this.scene.getAnimationGroupByName("walk")
     const doubleAttack = this.scene.getAnimationGroupByName("doubleAttack")
@@ -314,17 +325,23 @@ partieTermine(phrase : string) {
 async CreateScene() : Promise<Scene>{
     this.engine.enableOfflineSupport = false
     const scene = new Scene(this.engine)
-    const camera = new FreeCamera("camera", new Vector3(2.2,0.75,-3.2), this.scene)
-
-    camera.attachControl()
-    camera.speed = 0.25
+    scene.enablePhysics(new Vector3(0, -9.81,0), new CannonJSPlugin(true,10,CANNON))
 
 
-
-    const envTex = CubeTexture.CreateFromPrefilteredData("../../assets/env/sky.env",scene)
+    const envTex = CubeTexture.CreateFromPrefilteredData("../../assets/env/en.env",scene)
     scene.environmentTexture = envTex
     scene.createDefaultSkybox(envTex, true)
-    scene.environmentIntensity = 1
+    scene.environmentIntensity = 0.4
+    //const {meshes,animationGroups,skeletons} = await SceneLoader.ImportMeshAsync('','../../assets/models/','plan.glb',scene)
+    //const plan = meshes[0]
+    //console.log(plan)
+    //plan.position = new Vector3(0,0,0)
+    //plan.physicsImpostor = new PhysicsImpostor(plan, PhysicsImpostor.BoxImpostor,{mass:0,restitution:0.5})
+    const groud = MeshBuilder.CreateGround("groud",{width:1000, height:1000,subdivisions:2000}, this.scene)
+    groud.material  = this.CreateAsphalt()
+    groud.physicsImpostor = new PhysicsImpostor(groud, PhysicsImpostor.BoxImpostor, {mass:0,restitution:0.5})
+   // scene.createDefaultEnvironment({environmentTexture:"../../assets/env/sky.env"})
+
     return scene
   }
 
@@ -480,8 +497,8 @@ async CreateHous(scene :Scene){
 
   CreateAsphalt() : PBRMaterial{
     const pbr = new PBRMaterial("pbr", this.scene)
-    pbr.albedoTexture = new Texture("../../assets/textures/asphalt_diffuse.jpg",this.scene)
-    pbr.bumpTexture = new Texture("../../assets/textures/asphalt_normal.jpg",this.scene)
+    pbr.albedoTexture = new Texture("../../assets/textures/coast_diff.jpg",this.scene)
+    pbr.bumpTexture = new Texture("../../assets/textures/coast_nor.jpg",this.scene)
     pbr.invertNormalMapX = true
     pbr.invertNormalMapY = true
     pbr.roughness = 1
@@ -490,7 +507,7 @@ async CreateHous(scene :Scene){
     pbr.useRoughnessFromMetallicTextureGreen =  true
     pbr.useMetallnessFromMetallicTextureBlue  = true
 
-    pbr.metallicTexture = new Texture("../../assets/textures/asphalt_ao_rough_metal.jpg",this.scene)
+    pbr.metallicTexture = new Texture("../../assets/textures/coast_ao.jpg",this.scene)
     return pbr;
   }
 
@@ -526,7 +543,8 @@ async CreateCommbatant(scene :Scene){
   console.log(skeletons)
   animationGroups[0].stop()
   const hero = meshes[0]
-  hero.scaling.scaleInPlace(0.5)
+  hero.scaling.scaleInPlace(2)
+  hero.physicsImpostor = new PhysicsImpostor(hero, PhysicsImpostor.BoxImpostor, {mass:1,restitution:0.5})
 
 
   const skeleton = skeletons[0]
@@ -542,7 +560,7 @@ async CreateCommbatant2(scene :Scene){
   console.log(skeletons)
   animationGroups[0].stop()
   const hero2 = meshes[0]
-  hero2.scaling.scaleInPlace(0.5)
+  hero2.scaling.scaleInPlace(2)
 
 
   const skeleton = skeletons[0]
