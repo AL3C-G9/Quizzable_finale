@@ -65,7 +65,7 @@ export class ModelComponent implements OnInit {
    this.scene.activeCamera.attachControl(canva,true)
    camera.wheelPrecision   = 10
    camera.speed = 0.1
-   camera.minZ = 0.03
+   camera.minZ = 0
 
 
 
@@ -340,11 +340,22 @@ async CreateScene() : Promise<Scene>{
     const scene = new Scene(this.engine)
     scene.enablePhysics(new Vector3(0, -9.81,0), new CannonJSPlugin(true,10,CANNON))
 
+    const skybox = MeshBuilder.CreateBox("skyBox", {size:10000}, scene);
+	  const skyboxMaterial = new StandardMaterial("skyBox", scene);
+	  skyboxMaterial.backFaceCulling = false;
+	  skyboxMaterial.reflectionTexture = new CubeTexture("../../assets/env/en.env", scene);
+	  skyboxMaterial.reflectionTexture.coordinatesMode = Texture.SKYBOX_MODE;
+	  skyboxMaterial.diffuseColor = new Color3(0, 0, 0);
+	  skyboxMaterial.specularColor = new Color3(0, 0, 0);
+	  skybox.material = skyboxMaterial;
 
-    const envTex = CubeTexture.CreateFromPrefilteredData("../../assets/env/en.env",scene)
-    scene.environmentTexture = envTex
-    scene.createDefaultSkybox(envTex, true)
-    scene.environmentIntensity = 0.4
+    //const envTex = CubeTexture.CreateFromPrefilteredData("../../assets/env/en.env",scene)
+    //envTex.scale(1000)
+    //scene.environmentTexture = envTex
+    //scene.createDefaultSkybox(envTex, true)
+    //scene.environmentIntensity = 0.4
+
+
     //const {meshes,animationGroups,skeletons} = await SceneLoader.ImportMeshAsync('','../../assets/models/','plan.glb',scene)
     //const plan = meshes[0]
     //console.log(plan)
@@ -503,8 +514,25 @@ async CreateHous(scene :Scene){
 
   const house2 = await SceneLoader.ImportMeshAsync('','../../assets/models/','7_Village.obj',scene)
   const house  =  house2.meshes
-  house.forEach((h) =>{ h.position = new Vector3(-600,-40,-200)
-                        })
+  house.forEach((h) =>{ h.position = new Vector3(-600,-40,-200)})
+
+  const house3 = await SceneLoader.ImportMeshAsync('','../../assets/models/','1_Village.obj',scene)
+  const village_1  =  house3.meshes
+  console.log(village_1[0].position)
+  village_1.forEach((h) =>{ h.position = new Vector3(-50,-30,1300)})
+
+  const house4 = await SceneLoader.ImportMeshAsync('','../../assets/models/','5_Village.obj',scene)
+  const village_2  =  house4.meshes
+  console.log(village_2[0].position)
+  village_2.forEach((h) =>{ h.position = new Vector3(-500,-30,700)})
+
+
+  const house5 = await SceneLoader.ImportMeshAsync('','../../assets/models/','5_Village.obj',scene)
+  const village_3  =  house5.meshes
+  console.log(village_3[0].position)
+  village_3.forEach((h) =>{ h.position = new Vector3(-800,-30,700)})
+
+
 
   return scene
 }
