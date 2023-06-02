@@ -56,16 +56,17 @@ export class ModelComponent implements OnInit {
    // this.CreateGroud()
 
    //const camera1 = new ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 4, 10, new Vector3(0, 10, 0), this.scene);
-   const camera = new ArcRotateCamera("camera",-Math.PI / 2, Math.PI / 4,100, new Vector3(0,-200,0),this.scene)
-   camera.lowerRadiusLimit =2
-   camera.upperRadiusLimit = 10
+   const camera = new ArcRotateCamera("camera",-Math.PI / 2, Math.PI / 2.5,150, new Vector3(0,60,0),this.scene)
+   camera.upperBetaLimit = Math.PI / 2.2;
+
+   // camera.lowerRadiusLimit =2
+   //camera.upperRadiusLimit = 10
    this.scene.activeCamera = camera
    this.scene.activeCamera.attachControl(canva,true)
-   camera.lowerRadiusLimit = 2;
-   camera.upperRadiusLimit = 10;
    camera.wheelPrecision   = 10
-   camera.speed = 0.25
+   camera.speed = 0.1
    camera.minZ = 0.03
+
 
 
    //this.scene.activeCamera = camera1;
@@ -502,8 +503,8 @@ async CreateHous(scene :Scene){
 
   const house2 = await SceneLoader.ImportMeshAsync('','../../assets/models/','7_Village.obj',scene)
   const house  =  house2.meshes
-  house.forEach((h) => h.position = new Vector3(-600,-40,-200))
-  //console.log(house[0].position)
+  house.forEach((h) =>{ h.position = new Vector3(-600,-40,-200)
+                        })
 
   return scene
 }
@@ -583,7 +584,7 @@ async CreateCommbatant(scene :Scene){
   console.log(skeletons)
   animationGroups[0].stop()
   const hero = meshes[0]
-  hero.scaling.scaleInPlace(2)
+  hero.scaling.scaleInPlace(15)
   hero.physicsImpostor = new PhysicsImpostor(hero, PhysicsImpostor.BoxImpostor, {mass:0,restitution:0.75})
 
   return hero;
@@ -598,9 +599,6 @@ async CreateCommbatant2(scene :Scene){
   const hero2 = meshes[0]
   hero2.scaling.scaleInPlace(2)
 
-
-  const skeleton = skeletons[0]
-  const speed = 0.01
 
   const walk =   scene.getAnimationGroupByName("walk")
   const doubleAttack2 = scene.getAnimationGroupByName("doubleAttack")
