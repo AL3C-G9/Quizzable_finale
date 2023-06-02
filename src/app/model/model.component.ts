@@ -56,13 +56,17 @@ export class ModelComponent implements OnInit {
    // this.CreateGroud()
 
    //const camera1 = new ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 4, 10, new Vector3(0, 10, 0), this.scene);
-   const camera = new FollowCamera("camera",  new Vector3(0, -10, 100),this.scene)
+   const camera = new ArcRotateCamera("camera",-Math.PI / 2, Math.PI / 4,100, new Vector3(0,-200,0),this.scene)
    camera.lowerRadiusLimit =2
    camera.upperRadiusLimit = 10
    this.scene.activeCamera = camera
    this.scene.activeCamera.attachControl(canva,true)
    camera.lowerRadiusLimit = 2;
    camera.upperRadiusLimit = 10;
+   camera.wheelPrecision   = 10
+   camera.speed = 0.25
+   camera.minZ = 0.03
+
 
    //this.scene.activeCamera = camera1;
    //this.scene.activeCamera.attachControl(canva, true);
@@ -85,10 +89,9 @@ export class ModelComponent implements OnInit {
 
     const  hero   =  await this.CreateCommbatant(this.scene)
     hero.setPositionWithLocalVector(new Vector3(0.7,0,0));
-    //camera1.target = hero.position
     camera.lockedTarget = hero
     const  hero2  = await this.CreateCommbatant2(this.scene)
-    const speed = 0.02
+    const speed = 0.5
 
     const walk =   this.scene.getAnimationGroupByName("walk")
     const doubleAttack = this.scene.getAnimationGroupByName("doubleAttack")
@@ -493,10 +496,15 @@ async CreateScene() : Promise<Scene>{
   }
 
 async CreateHous(scene :Scene){
-  const {meshes,animationGroups,skeletons} = await SceneLoader.ImportMeshAsync('','../../assets/models/','8_Village.obj',scene)
-  const House = meshes[0]
-  const pos = House.position
-  House.translate(new Vector3(2, -300, -300), 1, Space.WORLD)
+  const {meshes} = await SceneLoader.ImportMeshAsync('','../../assets/models/','8_Village.obj',scene)
+  const Houses = meshes
+  Houses.forEach((obj) => {obj.position = new Vector3(-200, -40,-200)})
+
+  const house2 = await SceneLoader.ImportMeshAsync('','../../assets/models/','7_Village.obj',scene)
+  const house  =  house2.meshes
+  house.forEach((h) => h.position = new Vector3(-600,-40,-200))
+  //console.log(house[0].position)
+
   return scene
 }
 
