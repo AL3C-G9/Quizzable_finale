@@ -532,6 +532,12 @@ async CreateHous(scene :Scene){
   console.log(village_3[0].position)
   village_3.forEach((h) =>{ h.position = new Vector3(-800,-30,700)})
 
+  const house6 = await SceneLoader.ImportMeshAsync('','../../assets/models/','6_Village.obj',scene)
+  const village_4  =  house6.meshes
+  console.log(village_4[0].position)
+  village_4.forEach((h) =>{ h.position = new Vector3(-590,-30,-200)})
+
+
 
 
   return scene
