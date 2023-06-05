@@ -74,11 +74,11 @@ export class ModelComponent implements OnInit {
    //camera1.lowerRadiusLimit = 2;
    //camera1.upperRadiusLimit = 10;
    //camera1.wheelDeltaPercentage = 0.01;
-    this.CreatePlayStarter(this.scene, 16.0, 15, 0)
-    this.CreatePlayStarter2(this.scene, 35.8, 15, 30)
-    this.CreatePlayStarter3(this.scene, 40.6, 15, 0)
-    this.CreatePlayStarter4(this.scene, 65.0, 15, 30)
-    this.CreatePlayStarter5(this.scene, 67.5, 15, 0)
+    this.CreatePlayStarter(this.scene, 16.0, 12, 0)
+    this.CreatePlayStarter2(this.scene, 35.8, 12, 30)
+    this.CreatePlayStarter3(this.scene, 40.6, 12, 0)
+    this.CreatePlayStarter4(this.scene, 65.0, 12, 30)
+    this.CreatePlayStarter5(this.scene, 67.5, 12, 0)
    this.scene = await this.CreateHous(this.scene)
 
 
@@ -216,11 +216,11 @@ export class ModelComponent implements OnInit {
 
     })
 
-    const b1 = this.CreateBox('Niveau 1').setPositionWithLocalVector(new Vector3(1,50,0));
-    const b2 = this.CreateBox('Niveau 2').setPositionWithLocalVector(new Vector3(1.8,14,1));
-    const b3 = this.CreateBox('Niveau 3').setPositionWithLocalVector(new Vector3(2.6,14,0));
-    const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3(4.0,14,1));
-    const b5 = this.CreateBox('Niveau 5').setPositionWithLocalVector(new Vector3(4.5,14,0));
+    const b1 = this.CreateBox('Niveau 1').setPositionWithLocalVector(new Vector3( 16.0, 1, 0));
+    const b2 = this.CreateBox('Niveau 2').setPositionWithLocalVector(new Vector3(35.8, 1, 30));
+    const b3 = this.CreateBox('Niveau 3').setPositionWithLocalVector(new Vector3(40.6, 1, 0));
+    const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3(65.0, 1, 30));
+    const b5 = this.CreateBox('Niveau 5').setPositionWithLocalVector(new Vector3(67.5, 1, 0));
     if(this.pointsJ1 && this.pointsJ2){
       console.log(this.pointsJ1, this.pointsJ2)
       if(parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==0){
@@ -293,13 +293,13 @@ majPoints(){
 }
 
 CreateBox(texte:any) : Mesh{
-  const box = MeshBuilder.CreateBox('box', { size: 0.3 }, this.scene);
+  const box = MeshBuilder.CreateBox('box', { size: 10 }, this.scene);
 
   const material = new StandardMaterial('material', this.scene);
   material.diffuseColor = new Color3(0.5, 0.5, 1);
   box.material = material;
   
-  this.box.scaling.scaleInPlace(25)
+  
 
   // Create a dynamic texture for the text box
   const dynamicTexture = new DynamicTexture('dynamicTexture', { width: 490, height: 240 }, this.scene);
