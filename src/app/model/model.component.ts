@@ -290,8 +290,8 @@ CreateBox(texte:any) : Mesh{
   const material = new StandardMaterial('material', this.scene);
   material.diffuseColor = new Color3(0.5, 0.5, 1);
   box.material = material;
-  
-  
+
+
 
   // Create a dynamic texture for the text box
   const dynamicTexture = new DynamicTexture('dynamicTexture', { width: 490, height: 240 }, this.scene);
@@ -357,7 +357,7 @@ async CreateScene() : Promise<Scene>{
     //plan.physicsImpostor = new PhysicsImpostor(plan, PhysicsImpostor.BoxImpostor,{mass:0,restitution:0.5})
 
 
-    const groud = MeshBuilder.CreateGround("groud",{width:1000, height:1000}, this.scene)
+    const groud = MeshBuilder.CreateGround("groud",{width:5000, height:5000, subdivisions:500}, this.scene)
     groud.material  = this.CreateAsphalt()
     groud.physicsImpostor = new PhysicsImpostor(groud, PhysicsImpostor.BoxImpostor, {mass:0,restitution:0.5})
 
@@ -507,34 +507,42 @@ async CreateScene() : Promise<Scene>{
   }
 
 async CreateHous(scene :Scene){
-  const {meshes} = await SceneLoader.ImportMeshAsync('','../../assets/models/','8_Village.obj',scene)
+  const {meshes} = await SceneLoader.ImportMeshAsync('','../../assets/models/','village8.glb',scene)
   const Houses = meshes
-  Houses.forEach((obj) => {obj.position = new Vector3(-200, -40,-200)})
+  Houses[0].position = new Vector3(-200, -40,-200)
 
-  const house2 = await SceneLoader.ImportMeshAsync('','../../assets/models/','7_Village.obj',scene)
+  const house2 = await SceneLoader.ImportMeshAsync('','../../assets/models/','village7.glb',scene)
   const house  =  house2.meshes
-  house.forEach((h) =>{ h.position = new Vector3(-600,-40,-200)})
+  house[0].position = new Vector3(-600,-40,-200)
 
-  const house3 = await SceneLoader.ImportMeshAsync('','../../assets/models/','1_Village.obj',scene)
+  const house3 = await SceneLoader.ImportMeshAsync('','../../assets/models/','village1.glb',scene)
   const village_1  =  house3.meshes
   console.log(village_1[0].position)
-  village_1.forEach((h) =>{ h.position = new Vector3(-50,-30,1300)})
+  village_1[0].position = new Vector3(-50,-30,1300)
 
-  const house4 = await SceneLoader.ImportMeshAsync('','../../assets/models/','5_Village.obj',scene)
+  const house4 = await SceneLoader.ImportMeshAsync('','../../assets/models/','village5.glb',scene)
   const village_2  =  house4.meshes
   console.log(village_2[0].position)
-  village_2.forEach((h) =>{ h.position = new Vector3(-500,-30,700)})
+  village_2[0].position = new Vector3(-500,-30,700)
 
 
-  const house5 = await SceneLoader.ImportMeshAsync('','../../assets/models/','5_Village.obj',scene)
+  const house5 = await SceneLoader.ImportMeshAsync('','../../assets/models/','village5.glb',scene)
   const village_3  =  house5.meshes
   console.log(village_3[0].position)
-  village_3.forEach((h) =>{ h.position = new Vector3(-800,-30,700)})
+  village_3[0].position = new Vector3(-800,-30,700)
 
-  const house6 = await SceneLoader.ImportMeshAsync('','../../assets/models/','6_Village.obj',scene)
+  const house6 = await SceneLoader.ImportMeshAsync('','../../assets/models/','village6.glb',scene)
   const village_4  =  house6.meshes
   console.log(village_4[0].position)
-  village_4.forEach((h) =>{ h.position = new Vector3(-590,-30,-200)})
+  village_4[0].position = new Vector3(-590,-30,-200)
+
+
+
+  const house8 = await SceneLoader.ImportMeshAsync('','../../assets/models/','maison5.glb',scene)
+  const village_6  =  house8.meshes
+  console.log(village_4[0].position)
+  village_6[0].scaling.scaleInPlace(4)
+  village_6[0].position = new Vector3(-1400,-30,-300)
 
 
 
@@ -543,7 +551,7 @@ async CreateHous(scene :Scene){
 }
 
  CreateGroud(){
-    const groud = MeshBuilder.CreateGround("groud",{width:100, height:10}, this.scene)
+    const groud = MeshBuilder.CreateGround("groud",{width:5000, height:5000, subdivisions:500}, this.scene)
     groud.material  =this.CreateAsphalt()
   }
 
