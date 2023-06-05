@@ -110,6 +110,12 @@ export class DialogboxComponent implements OnInit {
     const r1 = document.getElementById("r1") as HTMLDivElement; 
     const r2 = document.getElementById("r2") as HTMLDivElement; 
     const r3 = document.getElementById("r3") as HTMLDivElement;
+    const spinButton = document.querySelector('#spin') as HTMLButtonElement;
+    spinButton.addEventListener("click", function() {
+      // Désactivez le bouton
+      spinButton.disabled = true;
+
+    });
 
     setTimeout(() => { 
       cat.innerHTML = this.texteCat.toString();
@@ -209,10 +215,12 @@ export class DialogboxComponent implements OnInit {
   }
 
   jeu(){
+    const spinButton = document.querySelector('#spin') as HTMLButtonElement;
     const countdown = document.getElementById("countdown") as HTMLDivElement;
     countdown.style.display='block'
     const countDownDate = new Date().getTime() + 16000; // 15 secondes à partir de maintenant
     const x = setInterval(() => {
+    spinButton.disabled = true;
     const now = new Date().getTime();
     const distance = countDownDate - now;
     const seconds = Math.floor((distance % (1000 * 60)) / 1000)+1;
@@ -227,6 +235,7 @@ export class DialogboxComponent implements OnInit {
           console.log(`(J1 a gagne n points)`);
           console.log(`popup(bonne reponse j1 -> prochaine question)`);
           document.removeEventListener('keydown', jeu);
+          spinButton.disabled = false;
           countdown.innerHTML = ''
           this.player1Points= this.player1Points +5;
           if (key==='a'){
@@ -246,6 +255,7 @@ export class DialogboxComponent implements OnInit {
           if (this.checkAnswer(2, key)){
             clearInterval(x);
             document.removeEventListener('keydown', jeu);
+            spinButton.disabled = false;
             countdown.innerHTML = ''
             this.player2Points= this.player2Points +5;
             if (key==='i'){
@@ -268,6 +278,7 @@ export class DialogboxComponent implements OnInit {
           console.log(`(J2 a gagne n points)`);
           console.log(`popup(bonne reponse j2 -> prochaine question)`);
           document.removeEventListener('keydown', jeu);
+          spinButton.disabled = false;
           countdown.innerHTML = ''
           this.player2Points= this.player2Points +5;
           if (key==='i'){
@@ -287,6 +298,7 @@ export class DialogboxComponent implements OnInit {
           if (this.checkAnswer(1, key)){
             clearInterval(x);
             document.removeEventListener('keydown', jeu);
+            spinButton.disabled = false;
             countdown.innerHTML = ''
             this.player1Points= this.player1Points +5;
             if (key==='a'){
@@ -304,6 +316,7 @@ export class DialogboxComponent implements OnInit {
       }
       else if (this.player1Choices==1 && this.player2Choices==1 && distance >0 && !this.checkAnswer(1, key) && !this.checkAnswer(2, key)){
         document.removeEventListener('keydown', jeu);
+        spinButton.disabled = false;
         clearInterval(x);
         countdown.innerHTML = ''
         const item=this.listeRepCorrectes1.find(
@@ -326,6 +339,7 @@ export class DialogboxComponent implements OnInit {
     if (distance <= 0) {
       clearInterval(x);
       countdown.innerHTML = ''
+      spinButton.disabled = false;
       this.questionTermine('Temps ecoulé, cliquer pour le prochain tours')
     }
     }, 1000);

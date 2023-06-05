@@ -37,10 +37,10 @@ export class ModelComponent implements OnInit {
   target: any;
   box: any;
   names!: string[];
-  pointsJ1 = localStorage.getItem("P1");
-  pointsJ2 = localStorage.getItem("P2");
-  player1nom= localStorage.getItem("nomJoueur1")
-  player2nom= localStorage.getItem("nomJoueur2")
+  pointsJ1 !: number;
+  pointsJ2 !: number ;
+  player1nom !:string;
+  player2nom !:string;
 
   constructor(private router:Router, private data: DataService, private route: ActivatedRoute) {
 
@@ -74,25 +74,26 @@ export class ModelComponent implements OnInit {
    //camera1.lowerRadiusLimit = 2;
    //camera1.upperRadiusLimit = 10;
    //camera1.wheelDeltaPercentage = 0.01;
-    this.CreatePlayStarter(this.scene, 16.0, 12, 0)
-    this.CreatePlayStarter2(this.scene, 35.8, 12, 30)
-    this.CreatePlayStarter3(this.scene, 40.6, 12, 0)
-    this.CreatePlayStarter4(this.scene, 65.0, 12, 30)
-    this.CreatePlayStarter5(this.scene, 67.5, 12, 0)
+    this.CreatePlayStarter(this.scene, -16.0, 12, -60)
+    this.CreatePlayStarter2(this.scene, 40.6, 12, 0)
+    this.CreatePlayStarter3(this.scene, 80.6, 12, 50)
+    this.CreatePlayStarter4(this.scene, 40.6, 12, 80)
+    this.CreatePlayStarter5(this.scene, 20, 12, 180)
    this.scene = await this.CreateHous(this.scene)
-
+   this.player1nom=this.data.getName(0)
+   this.player2nom= this.data.getName(1)
 
     const j1 = document.getElementById("joueur1") as HTMLDivElement;
     const j2 = document.getElementById("joueur2") as HTMLDivElement;
     this.majPoints();
-    j1.innerHTML = this.player1nom + ": " +localStorage.getItem("P1") +" points";
-    j2.innerHTML = this.player2nom + ": " +localStorage.getItem("P2") + " points";
+    j1.innerHTML = this.player1nom + ": " +this.data.getP1() +" points";
+    j2.innerHTML = this.player2nom + ": " +this.data.getP2() +" points";
 
     const  hero   =  await this.CreateCommbatant(this.scene)
     hero.setPositionWithLocalVector(new Vector3(1,0,0));
     camera.lockedTarget = hero
     const  hero2  = await this.CreateCommbatant2(this.scene)
-    const speed = 0.5
+    const speed = 0.7
 
     const walk =   this.scene.getAnimationGroupByName("walk")
     const doubleAttack = this.scene.getAnimationGroupByName("doubleAttack")
@@ -216,78 +217,69 @@ export class ModelComponent implements OnInit {
 
     })
 
-    const b1 = this.CreateBox('Niveau 1').setPositionWithLocalVector(new Vector3( 16.0, 1, 0));
-    const b2 = this.CreateBox('Niveau 2').setPositionWithLocalVector(new Vector3(35.8, 1, 30));
-    const b3 = this.CreateBox('Niveau 3').setPositionWithLocalVector(new Vector3(40.6, 1, 0));
-    const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3(65.0, 1, 30));
-    const b5 = this.CreateBox('Niveau 5').setPositionWithLocalVector(new Vector3(67.5, 1, 0));
-    if(this.pointsJ1 && this.pointsJ2){
-      console.log(this.pointsJ1, this.pointsJ2)
-      if(parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==0){
-        b1.setEnabled(true);
-        b2.setEnabled(false);
-        b3.setEnabled(false);
-        b4.setEnabled(false);
-        b5.setEnabled(false);
+    const b1 = this.CreateBox('Niveau 1').setPositionWithLocalVector(new Vector3(-16.0, 2, -60));
+    const b2 = this.CreateBox('Niveau 2').setPositionWithLocalVector(new Vector3( 40.6, 2, 0));
+    const b3 = this.CreateBox('Niveau 3').setPositionWithLocalVector(new Vector3( 80.6, 2, 50));
+    const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3( 40.6, 2, 80));
+    const b5 = this.CreateBox('Niveau 5').setPositionWithLocalVector(new Vector3( 20, 2, 180));
+    if(this.data.getP1()+this.data.getP2()==0){
+      b1.setEnabled(true);
+      b2.setEnabled(false);
+      b3.setEnabled(false);
+      b4.setEnabled(false);
+      b5.setEnabled(false);
+    }
+    else if (this.data.getP1()+this.data.getP2()==1){
+      b1.setEnabled(false);
+      b2.setEnabled(true);
+      b3.setEnabled(false);
+      b4.setEnabled(false);
+      b5.setEnabled(false);
+    }
+    else if (this.data.getP1()+this.data.getP2()==2){
+      b1.setEnabled(false);
+      b2.setEnabled(false);
+      b3.setEnabled(true);
+      b4.setEnabled(false);
+      b5.setEnabled(false);
+    }
+    else if (this.data.getP1()+this.data.getP2()==3){
+      b1.setEnabled(false);
+      b2.setEnabled(false);
+      b3.setEnabled(false);
+      b4.setEnabled(true);
+      b5.setEnabled(false);
+    }else if (this.data.getP1()+this.data.getP2()==4){
+      b1.setEnabled(false);
+      b2.setEnabled(false);
+      b3.setEnabled(false);
+      b4.setEnabled(false);
+      b5.setEnabled(true);
+    }else if (this.data.getP1()+this.data.getP2()==5){
+      b1.setEnabled(false);
+      b2.setEnabled(false);
+      b3.setEnabled(false);
+      b4.setEnabled(false);
+      b5.setEnabled(false);
+      if(this.data.getP1()>this.data.getP2()){
+        console.log(this.data.getP1() , this.data.getP2())
+        this.partieTermine('Fin de la partie ' +this.player1nom+ ' a gagne!');
       }
-      else if (parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==1){
-        b1.setEnabled(false);
-        b2.setEnabled(true);
-        b3.setEnabled(false);
-        b4.setEnabled(false);
-        b5.setEnabled(false);
+      else{
+        console.log(this.pointsJ1 , this.pointsJ2)
+        this.partieTermine('Fin de la partie ' +this.player2nom+ ' a gagne!');
       }
-      else if (parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==2){
-        b1.setEnabled(false);
-        b2.setEnabled(false);
-        b3.setEnabled(true);
-        b4.setEnabled(false);
-        b5.setEnabled(false);
-      }
-      else if (parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==3){
-        b1.setEnabled(false);
-        b2.setEnabled(false);
-        b3.setEnabled(false);
-        b4.setEnabled(true);
-        b5.setEnabled(false);
-      }else if (parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==4){
-        b1.setEnabled(false);
-        b2.setEnabled(false);
-        b3.setEnabled(false);
-        b4.setEnabled(false);
-        b5.setEnabled(true);
-      }else if (parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==5){
-        b1.setEnabled(false);
-        b2.setEnabled(false);
-        b3.setEnabled(false);
-        b4.setEnabled(false);
-        b5.setEnabled(false);
-        if(parseInt(this.pointsJ1)>parseInt(this.pointsJ2)){
-          this.partieTermine('Fin de la partie ' +this.player1nom+ ' a gagne!');
-        }
-        else{
-          this.partieTermine('Fin de la partie ' +this.player2nom+ ' a gagne!');
-        }
-      }
-  }
+    }
 
 ;
 };
 
 majPoints(){
   if(this.data.getGagnantBox() == this.player1nom){
-    if(this.pointsJ1){
-      let point1 = parseInt(this.pointsJ1)+1;
-      localStorage.setItem("P1", point1.toString())
-      this.pointsJ1 = localStorage.getItem("P1");
-    }
+    this.data.setP1()
   }
   else if (this.data.getGagnantBox() == this.player2nom){
-    if(this.pointsJ2){
-      let point2 = parseInt(this.pointsJ2)+1;
-      localStorage.setItem("P2", point2.toString())
-      this.pointsJ2 = localStorage.getItem("P2");
-    }
+    this.data.setP2()
   }
   this.data.viderGagnantBox();
 }
