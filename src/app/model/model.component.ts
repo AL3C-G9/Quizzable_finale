@@ -74,11 +74,11 @@ export class ModelComponent implements OnInit {
    //camera1.lowerRadiusLimit = 2;
    //camera1.upperRadiusLimit = 10;
    //camera1.wheelDeltaPercentage = 0.01;
-    this.CreatePlayStarter(this.scene, 1.0, 0.35, 0)
-    this.CreatePlayStarter2(this.scene, 1.8, 0.35, 1)
-    this.CreatePlayStarter3(this.scene, 2.6, 0.35, 0)
-    this.CreatePlayStarter4(this.scene, 4.0, 0.35, 1)
-    this.CreatePlayStarter5(this.scene, 4.5, 0.35, 0)
+    this.CreatePlayStarter(this.scene, 16.0, 15, 0)
+    this.CreatePlayStarter2(this.scene, 35.8, 15, 30)
+    this.CreatePlayStarter3(this.scene, 40.6, 15, 0)
+    this.CreatePlayStarter4(this.scene, 65.0, 15, 30)
+    this.CreatePlayStarter5(this.scene, 67.5, 15, 0)
    this.scene = await this.CreateHous(this.scene)
 
 
@@ -89,7 +89,7 @@ export class ModelComponent implements OnInit {
     j2.innerHTML = this.player2nom + ": " +localStorage.getItem("P2") + " points";
 
     const  hero   =  await this.CreateCommbatant(this.scene)
-    hero.setPositionWithLocalVector(new Vector3(0.7,0,0));
+    hero.setPositionWithLocalVector(new Vector3(1,0,0));
     camera.lockedTarget = hero
     const  hero2  = await this.CreateCommbatant2(this.scene)
     const speed = 0.5
@@ -216,11 +216,11 @@ export class ModelComponent implements OnInit {
 
     })
 
-    const b1 = this.CreateBox('Niveau 1').setPositionWithLocalVector(new Vector3(1,-0.01,0));
-    const b2 = this.CreateBox('Niveau 2').setPositionWithLocalVector(new Vector3(1.8,0,1));
-    const b3 = this.CreateBox('Niveau 3').setPositionWithLocalVector(new Vector3(2.6,-0.01,0));
-    const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3(4.0,0,1));
-    const b5 = this.CreateBox('Niveau 5').setPositionWithLocalVector(new Vector3(4.5,-0.01,0));
+    const b1 = this.CreateBox('Niveau 1').setPositionWithLocalVector(new Vector3(1,50,0));
+    const b2 = this.CreateBox('Niveau 2').setPositionWithLocalVector(new Vector3(1.8,14,1));
+    const b3 = this.CreateBox('Niveau 3').setPositionWithLocalVector(new Vector3(2.6,14,0));
+    const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3(4.0,14,1));
+    const b5 = this.CreateBox('Niveau 5').setPositionWithLocalVector(new Vector3(4.5,14,0));
     if(this.pointsJ1 && this.pointsJ2){
       console.log(this.pointsJ1, this.pointsJ2)
       if(parseInt(this.pointsJ1)+parseInt(this.pointsJ2)==0){
@@ -298,6 +298,8 @@ CreateBox(texte:any) : Mesh{
   const material = new StandardMaterial('material', this.scene);
   material.diffuseColor = new Color3(0.5, 0.5, 1);
   box.material = material;
+  
+  this.box.scaling.scaleInPlace(25)
 
   // Create a dynamic texture for the text box
   const dynamicTexture = new DynamicTexture('dynamicTexture', { width: 490, height: 240 }, this.scene);
@@ -377,6 +379,7 @@ async CreateScene() : Promise<Scene>{
       { type: 1, size: 0.14},
       this.scene
     );
+    this.octahedron1.scaling.scaleInPlace(25)
     this.octahedron1.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
 
     let material = new PBRMaterial("material", scene);
@@ -406,6 +409,7 @@ async CreateScene() : Promise<Scene>{
       { type: 1, size: 0.14},
       this.scene
     );
+    this.octahedron2.scaling.scaleInPlace(25)
     this.octahedron2.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
 
     let material = new PBRMaterial("material", scene);
@@ -433,6 +437,7 @@ async CreateScene() : Promise<Scene>{
       { type: 1, size: 0.14},
       this.scene
     );
+    this.octahedron3.scaling.scaleInPlace(25)
     this.octahedron3.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
 
     let material = new PBRMaterial("material", scene);
@@ -459,6 +464,7 @@ async CreateScene() : Promise<Scene>{
       { type: 1, size: 0.14},
       this.scene
     );
+    this.octahedron4.scaling.scaleInPlace(25)
     this.octahedron4.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
 
     let material = new PBRMaterial("material", scene);
@@ -486,6 +492,7 @@ async CreateScene() : Promise<Scene>{
       { type: 1, size: 0.14},
       this.scene
     );
+    this.octahedron5.scaling.scaleInPlace(25)
     this.octahedron5.setPositionWithLocalVector(new Vector3(pos1, pos2, pos3));
 
     let material = new PBRMaterial("material", scene);
@@ -618,7 +625,7 @@ async CreateCommbatant(scene :Scene){
   console.log(skeletons)
   animationGroups[0].stop()
   const hero = meshes[0]
-  hero.scaling.scaleInPlace(15)
+  hero.scaling.scaleInPlace(17)
   hero.physicsImpostor = new PhysicsImpostor(hero, PhysicsImpostor.BoxImpostor, {mass:0,restitution:0.75})
 
   return hero;
@@ -631,7 +638,7 @@ async CreateCommbatant2(scene :Scene){
   console.log(skeletons)
   animationGroups[0].stop()
   const hero2 = meshes[0]
-  hero2.scaling.scaleInPlace(2)
+  hero2.scaling.scaleInPlace(15)
 
 
   const walk =   scene.getAnimationGroupByName("walk")
