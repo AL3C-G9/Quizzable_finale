@@ -13,9 +13,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
 import '@babylonjs/loaders/OBJ/objFileLoader';
 import * as CANNON from 'cannon';
-// ...
+import { Client } from "colyseus.js";
+import { Room } from "colyseus.js";
 
 
+const ROOM_NAME = "my_room";
+const ENDPOINT = "ws://localhost:2567";
 
 @Component({
   selector: 'app-model',
@@ -33,7 +36,7 @@ export class ModelComponent implements OnInit {
   octahedron3 !: Mesh;
   octahedron4 !: Mesh;
   octahedron5 !: Mesh;
-  hero !: Mesh;
+  hero !: AbstractMesh;
   target: any;
   box: any;
   names!: string[];
@@ -42,13 +45,18 @@ export class ModelComponent implements OnInit {
   player1nom !:string;
   player2nom !:string;
 
+  private room!: Room<any>;
+  private _colyseus: Client = new Client(ENDPOINT);
+  private playerEntities: { [playerId: string]: AbstractMesh } = {};
+  private playerNextPosition: { [playerId: string]: Vector3 } = {};
+
   constructor(private router:Router, private data: DataService, private route: ActivatedRoute) {
 
   }
 
  async ngOnInit(): Promise<void> {
     const canva = document.querySelector('canvas')!
-    this.engine = new Engine(canva, true)
+    this.engine = new Engine(canva, true)!
     this.scene = await this.CreateScene()
     //const camera = new FreeCamera("camera", new Vector3(2.2,0.75,-3.2), this.scene)
     //camera.attachControl()
@@ -90,10 +98,11 @@ export class ModelComponent implements OnInit {
     j2.innerHTML = this.player2nom + ": " +this.data.getP2() +" points";
 
     const  hero   =  await this.CreateCommbatant(this.scene)
-    hero.setPositionWithLocalVector(new Vector3(1,0,0));
+   // hero.setPositionWithLocalVector(new Vector3(1,0,0));
     camera.lockedTarget = hero
     const  hero2  = await this.CreateCommbatant2(this.scene)
     const speed = 0.7
+
 
     const walk =   this.scene.getAnimationGroupByName("walk")
     const doubleAttack = this.scene.getAnimationGroupByName("doubleAttack")
@@ -122,22 +131,22 @@ export class ModelComponent implements OnInit {
    this.scene.onBeforeRenderObservable.add(() => {
       var keydown = false
       if(inputMap["s"]){
-        hero.moveWithCollisions(hero.forward.scaleInPlace(speed))
+        hero?.moveWithCollisions(hero.forward.scaleInPlace(speed))
         keydown = true
       }
 
       if(inputMap["x"]){
-        hero.moveWithCollisions(hero.forward.scaleInPlace(-speed))
+        hero?.moveWithCollisions(hero.forward.scaleInPlace(-speed))
         keydown = true
       }
 
       if(inputMap["w"]){
-        hero.rotate(Vector3.Up(),-0.1)
+        hero?.rotate(Vector3.Up(),-0.1)
         keydown = true
       }
 
       if(inputMap["c"]){
-        hero.rotate(Vector3.Up(),0.1)
+        hero?.rotate(Vector3.Up(),0.1)
         keydown = true
       }
 
@@ -214,6 +223,7 @@ export class ModelComponent implements OnInit {
 
         }
       }
+      this.doRender()
 
     })
 
@@ -269,9 +279,7 @@ export class ModelComponent implements OnInit {
         console.log(this.pointsJ1 , this.pointsJ2)
         this.partieTermine('Fin de la partie ' +this.player2nom+ ' a gagne!');
       }
-    }
-
-;
+    };
 };
 
 majPoints(){
@@ -619,16 +627,37 @@ intersectsBox(box1: BoundingBox, box2: BoundingBox): boolean {
 }
 
 async CreateCommbatant(scene :Scene){
-  const {meshes,animationGroups,skeletons} = await SceneLoader.ImportMeshAsync('','../../assets/models/','combattant5.glb',scene)
-  console.log("meshes",meshes)
-  console.log(animationGroups)
-  console.log(skeletons)
-  animationGroups[0].stop()
-  const hero = meshes[0]
-  hero.scaling.scaleInPlace(17)
-  hero.physicsImpostor = new PhysicsImpostor(hero, PhysicsImpostor.BoxImpostor, {mass:0,restitution:0.75})
+  this.room = await this._colyseus.joinOrCreate(ROOM_NAME)
+  console.log(this.room.id)
+  this.room.state.players.onAdd(async (player: any, sessionId: any) => {
+    const isCurrentPlayer = (sessionId === this.room.sessionId);
+    const {meshes,animationGroups,skeletons} = await SceneLoader.ImportMeshAsync('','../../assets/models/','combattant5.glb',scene)
+    console.log("meshes",meshes)
+    console.log(animationGroups)
+    console.log(skeletons)
+    animationGroups[0].stop()
+     this.hero = meshes[0]
+    this.hero.scaling.scaleInPlace(17)
+    this.hero.physicsImpostor = new PhysicsImpostor(this.hero, PhysicsImpostor.BoxImpostor, {mass:0,restitution:0.75})
 
-  return hero;
+    this.playerEntities[sessionId] = this.hero;
+    this.playerNextPosition[sessionId] = this.hero.position.clone();
+
+    player.onChange(() => {
+      this.playerNextPosition[sessionId].set(player.x, player.y, player.z);
+  });
+  })
+
+  this.room.state.players.onRemove((player: any, playerId: string | number) => {
+    this.playerEntities[playerId].dispose();
+    delete this.playerEntities[playerId];
+    delete this.playerNextPosition[playerId];
+});
+
+this.room.onLeave(code => {
+  this.router.navigate([""])
+})
+return this.hero
 }
 
 async CreateCommbatant2(scene :Scene){
@@ -647,6 +676,170 @@ async CreateCommbatant2(scene :Scene){
   const walking = scene.getAnimationGroupByName("walking")
   console.log(walking)
   return hero2;
+}
+
+
+private doRender(): void {
+  // constantly lerp players
+
+  const inputMap:any = {}
+  this.scene.actionManager = new ActionManager(this.scene)
+  this.scene.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnKeyDownTrigger,function (evt) {
+    inputMap[evt.sourceEvent.key] = evt.sourceEvent.type =="keydown"
+  }))
+  this.scene.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnKeyUpTrigger,function(evt){
+    inputMap[evt.sourceEvent.key] =  evt.sourceEvent.type =="keydown"
+  }))
+
+
+  const walk =   this.scene.getAnimationGroupByName("walk")
+  const doubleAttack = this.scene.getAnimationGroupByName("doubleAttack")
+  const attackSimple = this.scene.getAnimationGroupByName('Armature|mixamo.com|Layer0')
+  const walking = this.scene.getAnimationGroupByName("walking")
+  const block   =  this.scene.getAnimationGroupByName("block")
+
+  const run  = this.scene.getAnimationGroupByName('run')
+  const runback = this.scene.getAnimationGroupByName('runback')
+  const id      =  this.scene.getAnimationGroupByName('id')
+  const coupDePiedAllonger = this.scene.getAnimationGroupByName('coupDePiedAllonger')
+  const coupDePied = this.scene.getAnimationGroupByName('coupDePied')
+  const coupDePointPuissant = this.scene.getAnimationGroupByName('coupDePointPuissant')
+
+
+  this.scene.onBeforeRenderObservable.add(() => {
+    var keydown = false
+    if(inputMap["s"]){
+     // hero.moveWithCollisions(hero.forward.scaleInPlace(speed))
+     const p = this.playerEntities[this.room.sessionId]
+     this.playerNextPosition[this.room.sessionId] = p.moveWithCollisions(p.forward.scaleInPlace(0.4)).position
+
+      keydown = true
+    }
+
+    if(inputMap["x"]){
+     // hero.moveWithCollisions(hero.forward.scaleInPlace(-speed))
+      keydown = true
+    }
+
+    if(inputMap["w"]){
+      //hero.rotate(Vector3.Up(),-0.1)
+      keydown = true
+    }
+
+    if(inputMap["c"]){
+    //  hero.rotate(Vector3.Up(),0.1)
+      keydown = true
+    }
+
+    if(inputMap["d"]){
+      doubleAttack?.start(false,1.0,doubleAttack?.from,doubleAttack.to,false)
+    }
+
+
+
+    // HERO 2
+
+    if(inputMap["g"]){
+      //hero2.moveWithCollisions(hero2.forward.scaleInPlace(speed))
+      keydown = true
+    }
+    if(inputMap["b"]){
+     // hero2.moveWithCollisions(hero2.forward.scaleInPlace(-speed))
+      keydown = true
+    }
+
+    if(inputMap["v"]){
+      //hero2.rotate(Vector3.Up(),-0.1)
+      keydown = true
+    }
+
+    if(inputMap["n"]){
+     // hero2.rotate(Vector3.Up(),0.1)
+      keydown = true
+    }
+
+    if(inputMap["h"]){
+      coupDePiedAllonger?.start(false,1.0,coupDePiedAllonger?.from,coupDePiedAllonger?.to,false)
+
+    }
+
+    if(inputMap["j"]){
+      coupDePointPuissant?.start(false,1.0,coupDePointPuissant?.from,coupDePointPuissant?.to,false)
+    }
+
+    if(keydown){
+      if(!this.animating_1){
+          this.animating_1 = true
+          if(inputMap["s"]){
+            walking?.start(true,1.0,walking.from,walking.to,false)
+          }
+
+          if(inputMap["g"]){
+            run?.start(true,1.0,run.from,run.to,false)
+          }
+
+          if(inputMap["b"]){
+            runback?.start(true,1.0,runback.from,runback.to,false)
+          }
+
+
+      }
+    }
+    else{
+      if(this.animating_1){
+        coupDePiedAllonger?.stop()
+        runback?.stop()
+        run?.stop()
+        walk?.stop()
+        walking?.stop()
+        doubleAttack?.stop()
+        attackSimple?.stop()
+        id?.start()
+        block?.start()
+        this.animating_1 = false
+
+      }
+    }
+  })
+
+  this.scene.onPointerDown = (event, pointer) => {
+    if (event.button == 0) {
+        const targetPosition = pointer.pickedPoint!.clone();
+
+        // Position adjustments for the current play ground.
+        targetPosition.y = -1;
+        if (targetPosition.x > 245) targetPosition.x = 245;
+        else if (targetPosition.x < -245) targetPosition.x = -245;
+        if (targetPosition.z > 245) targetPosition.z = 245;
+        else if (targetPosition.z < -245) targetPosition.z = -245;
+
+        //this.playerNextPosition[this.room.sessionId] = targetPosition;
+
+        // Send position update to the server
+        this.room.send("updatePosition", {
+            x: targetPosition.x,
+            y: targetPosition.y,
+            z: targetPosition.z,
+        });
+    }
+};
+  this.scene.registerBeforeRender(() => {
+      for (let sessionId in this.playerEntities) {
+        const entity = this.playerEntities[sessionId];
+        const targetPosition = this.playerNextPosition[sessionId];
+        entity.position = Vector3.Lerp(entity.position, targetPosition, 0.05);
+      }
+  });
+
+  // Run the render loop.
+  this.engine.runRenderLoop(() => {
+      this.scene.render();
+  });
+
+  // The canvas/window resize event handler.
+  window.addEventListener('resize', () => {
+      this.engine.resize();
+  });
 }
 
 }
