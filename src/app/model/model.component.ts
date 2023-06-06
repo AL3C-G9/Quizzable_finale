@@ -56,7 +56,7 @@ export class ModelComponent implements OnInit {
    // this.CreateGroud()
 
    //const camera1 = new ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 4, 10, new Vector3(0, 10, 0), this.scene);
-   const camera = new ArcRotateCamera("camera",-Math.PI / 2, Math.PI / 2.5,150, new Vector3(0,60,0),this.scene)
+   const camera = new ArcRotateCamera("camera",-Math.PI / 2, Math.PI / 1.4,150, new Vector3(0,500,50),this.scene)
    camera.upperBetaLimit = Math.PI / 2.2;
 
    // camera.lowerRadiusLimit =2
@@ -74,11 +74,11 @@ export class ModelComponent implements OnInit {
    //camera1.lowerRadiusLimit = 2;
    //camera1.upperRadiusLimit = 10;
    //camera1.wheelDeltaPercentage = 0.01;
-    this.CreatePlayStarter(this.scene, -16.0, 12, -60)
-    this.CreatePlayStarter2(this.scene, 40.6, 12, 0)
-    this.CreatePlayStarter3(this.scene, 80.6, 12, 50)
-    this.CreatePlayStarter4(this.scene, 40.6, 12, 80)
-    this.CreatePlayStarter5(this.scene, 20, 12, 180)
+    this.CreatePlayStarter(this.scene, -60, 12, -50)
+    this.CreatePlayStarter2(this.scene,  30, 12, -20)
+    this.CreatePlayStarter3(this.scene, -40, 12, 20)
+    this.CreatePlayStarter4(this.scene, 50, 12, 100)
+    this.CreatePlayStarter5(this.scene, -40, 12, 200)
    this.scene = await this.CreateHous(this.scene)
    this.player1nom=this.data.getName(0)
    this.player2nom= this.data.getName(1)
@@ -217,11 +217,11 @@ export class ModelComponent implements OnInit {
 
     })
 
-    const b1 = this.CreateBox('Niveau 1').setPositionWithLocalVector(new Vector3(-16.0, 2, -60));
-    const b2 = this.CreateBox('Niveau 2').setPositionWithLocalVector(new Vector3( 40.6, 2, 0));
-    const b3 = this.CreateBox('Niveau 3').setPositionWithLocalVector(new Vector3( 80.6, 2, 50));
-    const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3( 40.6, 2, 80));
-    const b5 = this.CreateBox('Niveau 5').setPositionWithLocalVector(new Vector3( 20, 2, 180));
+    const b1 = this.CreateBox('Niveau 1').setPositionWithLocalVector(new Vector3(-60, 2, -50));
+    const b2 = this.CreateBox('Niveau 2').setPositionWithLocalVector(new Vector3( 30, 2, -20));
+    const b3 = this.CreateBox('Niveau 3').setPositionWithLocalVector(new Vector3( -40, 2, 20));
+    const b4 = this.CreateBox('Niveau 4').setPositionWithLocalVector(new Vector3( 50, 2, 100));
+    const b5 = this.CreateBox('Niveau 5').setPositionWithLocalVector(new Vector3( -40, 2, 200));
     if(this.data.getP1()+this.data.getP2()==0){
       b1.setEnabled(true);
       b2.setEnabled(false);
@@ -509,21 +509,21 @@ async CreateScene() : Promise<Scene>{
 async CreateHous(scene :Scene){
   const {meshes} = await SceneLoader.ImportMeshAsync('','../../assets/models/','village8.glb',scene)
   const Houses = meshes
-  Houses[0].position = new Vector3(-200, -40,-200)
+  Houses[0].position = new Vector3(650, -40,-400)
 
   const house2 = await SceneLoader.ImportMeshAsync('','../../assets/models/','village7.glb',scene)
   const house  =  house2.meshes
-  house[0].position = new Vector3(-600,-40,-200)
+  house[0].position = new Vector3(500,-40,500)
 
   const house3 = await SceneLoader.ImportMeshAsync('','../../assets/models/','village1.glb',scene)
   const village_1  =  house3.meshes
   console.log(village_1[0].position)
-  village_1[0].position = new Vector3(-50,-30,1300)
+  village_1[0].position = new Vector3(0,-40,300)
 
   const house4 = await SceneLoader.ImportMeshAsync('','../../assets/models/','village5.glb',scene)
   const village_2  =  house4.meshes
   console.log(village_2[0].position)
-  village_2[0].position = new Vector3(-500,-30,700)
+  village_2[0].position = new Vector3(200,-40,700)
 
 
   const house5 = await SceneLoader.ImportMeshAsync('','../../assets/models/','village5.glb',scene)
